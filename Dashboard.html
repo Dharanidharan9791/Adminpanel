@@ -223,6 +223,108 @@
         window.location.href = "AdminLogin.html";
 
     }
+    const logoutIcon = document.getElementById('logoutadmin');
+    if (logoutIcon) {
+        logoutIcon.addEventListener('click', () => {
+            const confirmationModal = document.getElementById('confirm-modal');
+            if (confirmationModal) {
+                confirmationModal.style.display = 'flex';
+            } else {
+                console.error('Confirmation modal not found.');
+            }
+        });
+    } else {
+        console.error('Logout icon not found.');
+    }
+
+
+
+
+    const logoutNoButton = document.getElementById('logoutadmin');
+    if (logoutNoButton) {
+        logoutNoButton.addEventListener('click', () => {
+            const confirmationModal = document.getElementById('Logout-modal');
+            if (confirmationModal) {
+                confirmationModal.style.display = 'none';
+            } else {
+                console.error('Confirmation modal not found.');
+            }
+        });
+    } else {
+        console.error('Logout No button not found.');
+    }
+    // Function to close the confirmation modal
+
+
+
+    function openModal() {
+        const confirmationModal = document.getElementById('Logout-modal');
+        if (confirmationModal) {
+            confirmationModal.style.display = 'flex';
+            const logoutButton = document.getElementById('logout-btn');
+            const cancelButton = document.querySelector('.logout-Cancel-btn');
+
+            username = getNameFromURL();
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => {
+                    cancelButton.classList.add('disabled')
+                    LogoutSpinner()
+                    logout(username);
+
+
+                });
+            }
+            console.log("djksfbkjsdbf");
+        } else {
+
+
+            console.error('Confirmation modal not found.');
+
+        }
+    }
+    function closeModal() {
+        const confirmModal = document.getElementById('Logout-modal');
+        if (confirmModal) {
+            confirmModal.style.display = 'none';
+        } else {
+            console.error('Confirmation modal not found.');
+        }
+    }
+
+
+
+
+    function myFunction() {
+        var x = document.getElementById("snackbar");
+        var y = document.getElementById("snackbarMob");
+
+        y.className = "show";
+        x.style.visibility = 'visible'
+        y.style.visibility = 'visible'
+        setTimeout(function () {
+            x.style.visibility = 'hidden'
+            y.style.visibility = 'hidden'
+
+        }, 3000);
+    }
+
+
+
+
+    function showSpinnerAndRedirect() {
+        const spinner = document.getElementById('spinner');
+        spinner.style.display = 'block';
+
+
+
+        setTimeout(() => {
+
+            window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+        }, 45000);
+    }
+
+
+    window.onload = showSpinnerAndRedirect;
 
 
 
@@ -252,12 +354,95 @@
         return localStorage.getItem('username');
     }
 
-    const nameFromURL = getNameFromURL();
-    const storedUsername = getUsernameFromStorage();
-    if (storedUsername) {
-        updateProfileWithName(storedUsername);
+    
+
+    function getNameFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('username');
     }
 
+
+
+   
+
+
+   
+
+
+    function logout(username) {
+
+        const cancelButton = document.querySelector('.logout-Cancel-btn');
+
+        fetch('https://p9p8zffjs0.execute-api.us-east-2.amazonaws.com/Sionyx/Signout-admin', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
+        })
+            .then(() => {
+                cancelButton.classList.remove('disabled')
+                localStorage.removeItem('sessionToken');
+                localStorage.removeItem('username');
+                window.location.href = "AdminLogin.html";
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    updateProfileWithName(nameFromURL || storedUsername || '');
+    function updateURL(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.history.pushState({ path: url.href }, '', url.href);
+    }
+
+    function getCurrentPageNumber() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page');
+        console.log("page number returned from getCurrentPageNumber(): ", page)
+        return page ? parseInt(page) : 1; // Default to page 1 if no page parameter is found
+    }
+
+
+    function redirectToCameraDetailsPage(details, page) {
+        const queryParams = new URLSearchParams(details);
+        const name = getUsernameFromStorage() || getNameFromURL();
+        queryParams.append('name', name);
+        queryParams.append('page', page);
+        window.location.href = `UserDetails.html?${queryParams.toString()}`;
+    }
+
+    window.onload = fetchAndPopulateUserList;
+    function updateURL(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.history.pushState({ path: url.href }, '', url.href);
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const usernameFromURL = getNameFromURL();
+        if (usernameFromURL) {
+            updateProfileWithName(usernameFromURL);
+        }
+        
+        if (!localStorage.getItem('sessionToken')) {
+            window.location.href = "AdminLogin.html";
+        } else {
+            fetchAndPopulateUserList();
+        }
+    });
+    
+
+
+
+
+    function getCurrentPageNumber() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page');
+        return page ? parseInt(page) : 1;
+    }
     function getNameFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('username');
@@ -332,7 +517,7 @@
         const name = getUsernameFromStorage() || getNameFromURL();
         queryParams.append('name', name);
         queryParams.append('page', page);
-        window.location.href = `CameraUserdetails.html?${queryParams.toString()}`;
+        window.location.href = `UserDetails.html?${queryParams.toString()}`;
     }
 
     window.onload = fetchAndPopulateUserList;
@@ -351,6 +536,8 @@
         const page = urlParams.get('page');
         return page ? parseInt(page) : 1;
     }
+
+
 
 
 
