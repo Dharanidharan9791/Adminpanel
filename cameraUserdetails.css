@@ -1,0 +1,395 @@
+
+ body {
+font-family: "Montserrat", sans-serif;
+ margin: 0;
+ padding: 0;
+ background-color: #F0F0F0;
+ }
+ 
+/* #Logout-modal .Logout-content {
+    background-color: #fefefe;
+    padding-left: 65px;
+    border: 1px solid #888;
+    border-radius: 7px;
+    opacity: 1;
+}
+#Logout-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+} */
+/* .Logout-content {
+    background-color: white;
+    width: 450px;
+    padding: 30px;
+    border-radius: 5px;
+    position: relative;
+    top: 59%;
+    left: 47%;
+    transform: translate(-35%, -190%);
+    opacity: 1;
+    padding-bottom: 40px;
+} */
+.camerabodyTableContainer{
+    max-height: 65vh !important;
+    min-height: 65vh !important;
+    overflow: auto;
+}
+.topHeader{
+    margin: 10px 0 ;
+}
+        
+ .user-status {
+ margin-bottom: 14px;
+ display: flex;
+ align-items: center;
+ gap: 18px;
+ /* Align items vertically */
+ }
+ 
+ .status-dot {
+ height: 10px;
+ width: 10px;
+ border-radius: 50%;
+ display: inline-block;
+ margin-right: 1px;
+ }
+ 
+ .status-dot.active {
+ background-color: green;
+ }
+ 
+ .status-dot.offline {
+ background-color: red;
+ }
+ 
+ .status-text {
+ font-size: 16px;
+ }
+ 
+ .status-text.active {
+ color: green;
+ }
+ 
+ .status-text.offline {
+ color: red;
+ }
+ 
+ .camera-table {
+ width: 100%;
+ border-collapse: collapse;
+ background-color: #FFFFFF;
+  margin-top: 30px;
+
+ }
+ 
+ 
+
+ #camera-details-body tr{
+    background-color: #fff;
+    border-bottom: 1px solid #e2e2e2;
+  
+  }
+  #camera-details-body tr:hover{
+    background-color: #9b9b9ba8;
+    cursor: pointer;
+  }
+
+
+ .camera-table th {
+ background-color:  #E2E2E2;
+ color: black;
+ text-align: left;
+ padding: 12px;
+ }
+ 
+ /* .camera-table tr:nth-child(even) {
+    background-color: #ddd;
+ }
+ .camera-table tr:nth-child(odd) {
+   background-color: #FFFFFF;
+} */
+
+
+ .camera-table tr:hover {
+
+ }
+ 
+ .edit-btn,
+ .delete-btn {
+ border: none;
+ background: none;
+ cursor: pointer;
+ color: #4caf50;
+ }
+ 
+ .edit-btn:hover,
+ .delete-btn:hover {
+ color: #45a049;
+ }
+ 
+ .username {
+ font-size: 26px;
+ display: inline-block;
+ margin: 0;
+ }
+ 
+ .back-btn {
+ font-size: 18px;
+ display: inline-block;
+ cursor: pointer;
+ }
+ .back-btn-box {
+  
+    background-color: white;
+    /* padding: 15px; */
+    /* padding-right: 25px; */
+    /* padding-left: 25px; */
+    border-radius: 5px;
+    /* margin-right: 20px; */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#no-cameras-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.back-btn-box:hover i {
+  color: rgb(180, 43, 43);
+}
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+ 
+.pagination button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+}
+ 
+.pagination button:hover {
+    background-color: #e9e9e9;
+}
+ 
+.pagination button:disabled {
+    background-color: #ddd;
+    color: #999;
+    cursor: default;
+}
+ 
+#page-info {
+    margin: 0 10px;
+}
+
+
+.search-container {
+    margin-bottom: 15px;
+    /* position: relative; */
+
+}
+
+.user-email{
+    word-break: break-word;
+}
+.search-input {
+    width: 30%;
+    padding: 13px;
+    border: none !important;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.search-input :focus{
+    border: none !important;
+    box-shadow: none !important;
+}
+.search-input ::active{
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+
+@media (min-width: 600px) { /* Adjust the min-width value to your requirement */
+    .element {
+        transform: scale(1.25); /* 125% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+
+
+@media (min-width: 600px) { /* Adjust the min-width value to your requirement */
+    .element {
+        transform: scale(1.25); /* 125% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+
+
+
+/* Media query for zoom size 150% */
+@media (min-width: 600px) { /* Adjust the min-width value to your requirement */
+    .element {
+        transform: scale(1.5); /* 150% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+
+@media (max-width: 767px) { /* Adjust the max-width value to target mobile devices */
+    .element {
+        transform: scale(1.25); /* 125% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+/* Media query for zoom size 125% on tablet */
+@media (min-width: 768px) and (max-width: 1024px) { /* Adjust the min-width and max-width values to target tablets */
+    .element {
+        transform: scale(1.25); /* 125% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+
+
+/* Media query for zoom size 150% */
+@media (min-width: 600px) { /* Adjust the min-width value to your requirement */
+    .element {
+        transform: scale(1.5); /* 150% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+
+    .user-table-container {
+        /* max-height: 0px;
+        min-height: 68vh;
+        max-height: 0vh; 
+        overflow-y: auto;
+        font-size: small; */
+    }
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 767px) { /* Adjust the max-width value to target mobile devices */
+    .element {
+        transform: scale(1.25); /* 125% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+/* Media query for zoom size 150% */
+@media (min-width: 600px) { /* Adjust the min-width value to your requirement */
+    .element {
+        transform: scale(1.5); /* 150% zoom */
+        transform-origin: 0 0; /* Adjust the origin point as needed */
+    }
+}
+
+ .search-container {
+    margin-bottom: 17px;
+}
+    
+    .search-input {
+    width: 40%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    }
+    .status-container {
+        display: inline-block;
+        height:25px;
+        padding: 0px 5px 2px 5px; /* Adjust padding as needed */
+        border-radius: 4px; 
+        opacity: 0.5;/* Rounded corners */
+    }
+    
+    .status-container.active {
+        background-color: #DFF1D9; /* Light green background for active status */
+    }
+    
+    .status-container.offline {
+        background-color: lightcoral; /* Light red background for offline status */
+    }
+    .status-text {
+        font-weight: bold; /* Make the text bold */
+    }
+    
+    .status-text.active {
+        color: green; /* Green text for active status */
+    }
+    
+    .status-text.offline {
+        color: red; /* Red text for offline status */
+    }
+    #no-cameras-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-start;
+        padding-top: 12px;
+        letter-spacing: 0.38px;
+        width: 100%;
+      }
+
+    #Logout-modal button {
+        border: none;
+    }
+    
+}
+
+@media only screen and (max-width: 1600px) and (min-width: 1400px) {
+    /*125*/
+  
+    .camerabodyTableContainer{
+        max-height: 60vh !important;
+        min-height: 60vh !important;
+        overflow: auto;
+    }
+  
+  }
+  
+  @media only screen and (max-width: 1400px) and (min-width: 1200px) {
+  
+    /*150*/
+    .camerabodyTableContainer{
+        max-height: 60vh !important;
+        min-height: 60vh !important;
+        overflow: auto;
+    }
+}
+ 

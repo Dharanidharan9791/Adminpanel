@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIONYX Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"> -->
+    <link rel="stylesheet" href="https://use.typekit.net/rxm7ono.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="userdetails.js"></script>
+    <link rel="stylesheet" href="userdetails.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="spinner.css">
+</head>
+<style>
+    * {
+        font-family: proxima-nova, sans-serif !important;
+        font-style: normal;
+    }
+
+    #spinner {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        margin: auto;
+    }
+
+    .spinner div {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        background: #ffffff;
+        border-radius: 50%;
+        animation: spinner 1.2s linear infinite;
+    }
+
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .spinner div:nth-child(1) {
+        animation-delay: 0s;
+        top: 16px;
+        left: 16px;
+    }
+
+    .spinner div:nth-child(2) {
+        animation-delay: -0.1s;
+        top: 7px;
+        left: 26px;
+    }
+
+    .spinner div:nth-child(3) {
+        animation-delay: -0.2s;
+        top: 3px;
+        left: 16px;
+    }
+
+    .spinner div:nth-child(4) {
+        animation-delay: -0.3s;
+        top: 7px;
+        left: 6px;
+    }
+
+    @keyframes spinner {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+    @-webkit-keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Apply spinning animation to the delete button when the class is added */
+    .delete-btn-spinning {
+        animation: spin 0.5s linear infinite;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* 
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }*/
+    .pagination {
+        display: inline-block;
+        justify-content: center;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #c7d3c7;
+    }
+
+    .pagination a.active {
+        background-color: #000000c2;
+        color: white;
+        border: 1px solid #000000c2;
+    }
+
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }
+
+    /* Sidebar hidden on small screens */
+
+
+    /* Toggle button hidden on larger screens */
+    .toggle-btn {
+        display: none;
+    }
+
+    .spinner {
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #333;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    #spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+    }
+
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+    }
+
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 6px solid #94a0a8;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #899096 transparent transparent transparent;
+    }
+
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" id="sidebar">
+            <div class="logosionyx">
+                <div class="sionyxLogoIcon"></div>
+            </div>
+            <br>
+            <div class="redirect-container">
+                <a id="dashboard-link"
+                    style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
+                    <!-- href="https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/UserDetails.html" -->
+
+                    <div style="display: inline-block;text-overflow:ellipsis"
+                        onmouseout="document.getElementById('dashboard-link').style.color='black'">
+                        <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
+                    </div>
+                </a>
+
+                <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
+                        style="color: rgb(148, 148, 148)"></i>Add User</a>
+                <div id="snackbar">Still in implementation!</div>
+                <div id="snackbar1"></div>
+            </div>
+            <div class="footer">
+                <div class="profile footerUserDetails">
+                    <div class="userIcon">
+                        <img src="profile_pic.png" id="userIcon" alt="Administrator">
+
+                    </div>
+                    <div class="userDetails">
+                        <div id="profile-username"> </div>
+                        <div id="admintext">Administrator</div>
+                    </div>
+                    <div class="logoutContainer">
+                        <i class="fas fa-sign-out-alt icon" id="logoutadmin" onclick="openModal()"
+                            style="font-size: 20px"></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="sidebarOffCanvas" style="display: none;" class="offCanvasMenu">
+            <div class="canvasHeader">
+
+                <div class="logoContainer">
+                    <!-- <img src="Logo.png" alt="SIONYX Logo" style="filter: brightness(650%);" class="sionyxLogoIcon" height="50px" width="150px"> -->
+                    <div class="sionyxLogoIcon"></div>
+                </div>
+                <div class="closetnContainer">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                </div>
+            </div>
+
+            <div class="redirect-container">
+                <a href="https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/UserDetails.html"
+                    id="dashboard-link"
+                    style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
+                    <div style="display: inline-block;text-overflow:ellipsis"
+                        onmouseout="document.getElementById('dashboard-link').style.color='black'">
+                        <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
+                    </div>
+                </a>
+
+                <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
+                        style="color: rgb(148, 148, 148)"></i>Add User</a>
+                <div id="snackbarMob">Still in implementation!</div>
+                <div id="snackbar1"></div>
+            </div>
+            <div class="footer">
+                <div class="profile footerUserDetails">
+                    <div class="userIcon">
+                        <img src="profile_pic.png" id="userIcon" alt="Administrator">
+
+                    </div>
+                    <div class="userDetails">
+                        <div id="profile-usernames"> </div>
+                        <div id="admintext">Administrator</div>
+                    </div>
+                    <div class="logoutContainer">
+                        <i class="fas fa-sign-out-alt icon" id="logoutadmin" onclick="openModal()"
+                            style="font-size: 20px"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+
+            <div class="headerContainer">
+                <div class="headingConatainer">
+                    <span id="BurgerIcon" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                    <h2 class="topHeader">Users</h2>
+                </div>
+                <div class="search-container">
+                    <span class="clicked-user"></span>
+                    <input type="text" class="search-input" placeholder="Search users..." oninput="filterUsers()">
+                </div>
+            </div>
+
+
+            <div class="content-box">
+                <div class="user-table-container">
+                    <div id="no-users-message" style="display: none;">No users found.</div>
+
+                    <!-- <table class="headertable">
+                        <thead style="font-weight: bold;">
+                            <tr id="header-table" >
+                               
+                                <td class=" username-td">Username</td>
+                                <th class="emailID-td" >Email</th>
+                                <th class="location-td" >Location</th>
+                                <th class="status-td">Status</th>
+                                <th class="lastseen-td">Last Login</th>
+                                <th class="deviceCount-td">No of Devices</th>
+                                <th class="deleteButton-td">Delete</th>
+                                <th class="detailsButton-td">Device List</th>
+                            </tr>
+                        </thead>
+                    </table> -->
+                    <div class="bodyTableContainer">
+                        <table class="user-table" id="user-list">
+                            <thead style="font-weight: bold;">
+                                <tr id="header-table">
+                                    <th class="">Username</th>
+                                    <th class="emailID-td">Email</th>
+                                    <th class="location-td">Location</th>
+                                    <th class="makeadmin-td">Make Admin</th>
+                                    <th class="lastseen-td">Last Login</th>
+                                    <th class="deviceCount-td">Camera Count</th>
+                                    <th class="deleteButton-td">Delete</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="user-details-body">
+                                <tr>
+                                    <div class="scrollable-content">
+
+                                    </div>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+
+
+                </div>
+               
+
+                </div>
+
+                <div id="paginationContainer">
+                    <div id="result-info" class="result-info"></div>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+        <div id="confirmation-modal">
+            <div class="modal-content">
+                <p id="deletesure"><b>Are you sure you want to delete the user <span id="delete-username"></span>?</b>
+                </p>
+                <p id="deletetext">This action is permanent and cannot be undone</p>
+                <div class="button-container">
+                    <button class="delete-btn-confirm" id="delete-btn"
+                        style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box;color:#fff; border-radius: 5px; opacity: 1;"
+                        onmouseover="this.style.backgroundColor='#ff3333'"
+                        onmouseout="this.style.backgroundColor='#D80000'" onclick="showSpinner()">Delete</button>
+                    <button class="cancel-btn" onclick="closeConfirmationModal()"
+                        style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
+                        onmouseover="this.style.backgroundColor='#999'"
+                        onmouseout="this.style.backgroundColor='#FFFFFF'">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div id="spinner" class="lds-ring" style="display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+       
+       
+
+        <div id="Logout-modal">
+            <div class="Logout-content">
+                <p><b>Are you sure you want to logout?</b></p>
+                <div class="button-container">
+                    <button class="logout-btn" id="logout-btn" style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box; border-radius: 5px; opacity: 1;      margin-right: 20px;
+                color: white;" onmouseover="this.style.backgroundColor='#ff3333'"
+                        onmouseout="this.style.backgroundColor='#D80000'"> <span id="logout-text">Logout</span>
+                        <span id="logout-spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+
+
+                    <button class="logout-Cancel-btn" onclick="closeModal()"
+                        style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
+                        onmouseover="this.style.backgroundColor='#999'"
+                        onmouseout="this.style.backgroundColor='#FFFFFF'">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="admin-modal">
+            <div class="admin-content">
+                <p id="adminsure"><b>Are you sure you want to change admin status for the user <span id="admin-username"></span>?</b></p>
+                <div class="button-container">
+                    <button class="admin-confirm" id="admin-confirm" style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box;color:#fff; border-radius: 5px; opacity: 1;"
+                    onmouseover="this.style.backgroundColor='#ff3333'"
+                    onmouseout="this.style.backgroundColor='#D80000'">Confirm</button>
+                    <button class="admin-btn" id="cancel-btn" style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
+                    onmouseover="this.style.backgroundColor='#999'"
+                    onmouseout="this.style.backgroundColor='#FFFFFF'">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script>
+        let usersData = null;
+        function openNav() {
+            document.getElementById("sidebarOffCanvas").style.display = "flex";
+            // document.getElementById("BurgerIcon").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("sidebarOffCanvas").style.display = "none";
+            // document.getElementById("BurgerIcon").style.display = "block";
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+
+            if (!localStorage.getItem('sessionToken')) {
+                window.location.href = "AdminLogin.html";
+                // window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+            } else {
+                fetchAndPopulateUserList();
+            }
+        });
+
+        window.addEventListener('popstate', function (event) {
+            if (!localStorage.getItem('sessionToken')) {
+                window.location.href = "AdminLogin.html";
+                //window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+            }
+        });
+        const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
+
+        let sessionTimer;
+
+        function resetSessionTimer() {
+            clearTimeout(sessionTimer);
+            sessionTimer = setTimeout(logoutUser, SESSION_TIMEOUT);
+        }
+
+        function logoutUser() {
+            // Perform logout actions here, such as redirecting to the logout page
+            localStorage.removeItem('sessionToken');
+            //window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+            window.location.href = "AdminLogin.html";
+
+        }
+
+        document.addEventListener("mousemove", resetSessionTimer);
+        document.addEventListener("keypress", resetSessionTimer);
+        document.addEventListener("DOMContentLoaded", resetSessionTimer);
+        var totalUserListFromDb = 0;
+        function fetchAndPopulateUserList() {
+
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'block';
+            }
+
+            const userTable = document.querySelector('.user-table-container');
+            if (userTable) {
+                userTable.style.display = 'none';
+            }
+
+            fetch('https://7lbogtrgte.execute-api.us-east-2.amazonaws.com/Sionyx/Demoarraydb')
+                .then(response => response.json())
+                .then(data => {
+                    usersData = data;
+                    const userListDiv = document.getElementById('user-details-body');
+                    const noUsersMessageDiv = document.getElementById('no-users-message');
+                    if (data && data.users && Array.isArray(data.users)) {
+                        if (data.users.length === 0) {
+                            noUsersMessageDiv.style.display = 'block';
+                        } else {
+                            totalUserListFromDb = data.users.length;
+                            console.log("totalUserListFromDb", totalUserListFromDb)
+                            console.log("userslength", data.users.length)
+                            noUsersMessageDiv.style.display = 'none';
+                            data.users.forEach((user,index) => {
+                                const existingRows = userListDiv.querySelectorAll('tr');
+                                let userExists = false;
+
+                                existingRows.forEach(row => {
+                                    if (row.firstChild.textContent === user.alias_name.S) {
+                                        userExists = true;
+                                        return;
+                                    }
+                                });
+
+                                if (!userExists) {
+                                    const userDiv = document.createElement('tr');
+
+
+                                    const usernameTd = document.createElement('td');
+                                    usernameTd.classList.add('username-td')
+
+                                    const userNameText = document.createElement('span');
+                                    userNameText.textContent = user.alias_name ? user.alias_name.S : "N/A";
+                                    userNameText.classList.add('userName-text');
+                                    usernameTd.appendChild(userNameText);
+
+
+                                    if (user.active_status && user.active_status.S === 'Offline') {
+                                        const statusDot = document.createElement('span');
+                                        statusDot.classList.add('status-dot');
+                                        statusDot.style.backgroundColor = 'red';
+                                        usernameTd.appendChild(statusDot);
+
+
+                                    } else {
+                                        const statusDot = document.createElement('span');
+                                        statusDot.classList.add('status-dot');
+                                        statusDot.style.backgroundColor = 'green';
+                                        usernameTd.appendChild(statusDot);
+
+
+                                    }
+
+                                    const emailTd = document.createElement('td');
+                                    emailTd.textContent = user.email ? user.email.S : "N/A";
+                                    emailTd.classList.add('emailID-td')
+
+                                    const locationTd = document.createElement('td');
+                                    locationTd.textContent = user.location ? user.location.S : "N/A";
+                                    locationTd.classList.add('location-td')
+
+
+
+                                    //  const statusTd = document.createElement('td');
+                                    //   statusTd.classList.add('status-td')
+
+                                    /*     if (user.active_status && user.active_status.S === 'Offline') {
+                                             const statusDot = document.createElement('span');
+                                             statusDot.classList.add('status-dot');
+                                             statusDot.style.backgroundColor = 'red';
+                                             usernameTd.appendChild(statusDot);
+         
+                                             const statusText = document.createElement('span');
+                                             statusText.textContent = user.active_status.S;
+                                             statusText.classList.add('status-text', 'Offline');
+                                             statusText.style.color = 'red';
+                                             statusTd.appendChild(statusText);
+                                         } else {
+                                             const statusDot = document.createElement('span');
+                                             statusDot.classList.add('status-dot');
+                                             statusDot.style.backgroundColor = 'green';
+                                             usernameTd.appendChild(statusDot);
+         
+                                             const statusText = document.createElement('span');
+                                             statusText.textContent = user.active_status.S;
+                                             statusText.classList.add('status-text', 'Active');
+                                             statusText.style.color = 'green';
+                                             statusTd.appendChild(statusText);
+                                         }
+         */
+                                    const last_seenTd = document.createElement('td');
+                                    last_seenTd.textContent = user.last_seen ? user.last_seen.S : "N/A";
+                                    last_seenTd.classList.add('lastseen-td')
+
+
+                        
+                                    const statusTd = document.createElement('td');
+                                    let checkboxValue = typeof(user.make_admin) === "undefined"  || !user.make_admin.BOOL? "" : "checked";
+
+                                   
+                               
+                                    statusTd.innerHTML += `
+                                        <label class="switch"><input type="checkbox" class="admin-toggle"
+                                                                 ${checkboxValue}>
+                                                                <span class="slider round"></span>
+                                                              </label>
+                                                            `;
+                                    statusTd.classList.add('makeadmin-td')
+
+
+                                    statusTd.addEventListener('click', (event) => {
+                                        event.stopPropagation();
+                                        toogle(index)
+ 
+                                    });
+
+                                    const deviceCountTd = document.createElement('td');
+                                    deviceCountTd.style.textAlign = 'left';
+                                    const deviceCount = getDeviceCount(user);
+                                    deviceCountTd.textContent = deviceCount;
+                                    deviceCountTd.classList.add('deviceCount-td')
+
+                                    userDiv.appendChild(usernameTd);
+                                    userDiv.appendChild(emailTd);
+                                    userDiv.appendChild(locationTd);
+                                    userDiv.appendChild(statusTd);
+                                    userDiv.appendChild(last_seenTd);
+                                    userDiv.appendChild(deviceCountTd);
+
+
+                                    const deleteButtonCell = document.createElement('td');
+                                    deleteButtonCell.style.textAlign = 'left';
+                                    deleteButtonCell.style.verticalAlign = 'middle';
+                                    deleteButtonCell.classList.add('deleteButton-td')
+
+                                    const deleteButton = document.createElement('button');
+                                    deleteButton.classList.add('delete-btn');
+                                    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                                    deleteButton.style.fontSize = '16px';
+
+
+                                    deleteButton.addEventListener('mouseenter', () => {
+                                        deleteButton.style.color = 'red';
+                                    });
+                                    deleteButton.addEventListener('mouseleave', () => {
+                                        deleteButton.style.color = '';
+                                    });
+
+
+
+                                    deleteButton.addEventListener('click', (event) => {
+                                        event.stopPropagation();
+                                        const username = user.cognito_user ? user.cognito_user.S : '';
+                                        openConfirmationModal(username, userDiv);
+                                        console.log(userDiv);
+                                        console.log(username);
+                                    });
+
+
+                                    deleteButtonCell.appendChild(deleteButton);
+                                    userDiv.appendChild(deleteButtonCell);
+
+                                    //  const detailsButtonCell = document.createElement('td');
+                                    //  detailsButtonCell.style.textAlign = 'left';
+                                    //   const detailsButton = document.createElement('button');
+                                    //   detailsButton.classList.add('details-btn');
+                                    //   detailsButton.innerHTML = '<i class="fas fa-angle-double-right"></i>';
+                                    //   detailsButtonCell.classList.add('detailsButton-td')
+
+
+                                    userDiv.addEventListener('click', () => {
+                                        const details = {
+                                            "Auora": user.Aurora ? user.Aurora.S : "",
+                                            "Opsin": user.Opsin ? user.Opsin.S : "",
+                                            "Nightwave": user.Nightwave ? user.Nightwave.S : "",
+                                            "Utc_timestamp": user.utc_timestamp ? user.utc_timestamp.N : "",
+                                            "active_status": user.active_status ? user.active_status.S : "",
+                                            "utc_timestamp": user.utc_timestamp ? user.utc_timestamp.S : "",
+                                            "email": user.email ? user.email.S : "",
+                                            "username": user.alias_name ? user.alias_name.S : "",
+                                            "last_seen": user.last_seen ? user.last_seen.S : "",
+                                        };
+                                        redirectToCameraDetailsPage(details, getCurrentPageNumber());
+                                    });
+
+                                    //  detailsButtonCell.appendChild(detailsButton);
+                                    // userDiv.appendChild(detailsButtonCell);
+
+                                    userListDiv.appendChild(userDiv).remove;
+
+                                    userListDiv.appendChild(userDiv);
+                                    console.log("length##########", userDiv)
+                                }
+                            });
+                            pagination();
+
+
+                        }
+                    } else {
+                        noUsersMessageDiv.style.display = 'block';
+                        console.error('Error fetching user data: Invalid data structure');
+                    }
+
+                    if (spinner) {
+                        spinner.style.display = 'none';
+                    }
+
+                    if (userTable) {
+                        userTable.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    const noUsersMessageDiv = document.getElementById('no-users-message');
+                    noUsersMessageDiv.style.display = 'none';
+                    console.error('Error fetching user data:', error);
+
+                    if (spinner) {
+                        spinner.style.display = 'none';
+                    }
+
+                    if (userTable) {
+                        userTable.style.display = 'block';
+                    }
+                });
+        }
+
+
+
+
+
+
+
+        const logoutIcon = document.getElementById('logoutadmin');
+        if (logoutIcon) {
+            logoutIcon.addEventListener('click', () => {
+                const confirmationModal = document.getElementById('confirm-modal');
+                if (confirmationModal) {
+                    confirmationModal.style.display = 'flex';
+                } else {
+                    console.error('Confirmation modal not found.');
+                }
+            });
+        } else {
+            console.error('Logout icon not found.');
+        }
+
+
+
+
+        const logoutNoButton = document.getElementById('logoutadmin');
+        if (logoutNoButton) {
+            logoutNoButton.addEventListener('click', () => {
+                const confirmationModal = document.getElementById('Logout-modal');
+                if (confirmationModal) {
+                    confirmationModal.style.display = 'none';
+                } else {
+                    console.error('Confirmation modal not found.');
+                }
+            });
+        } else {
+            console.error('Logout No button not found.');
+        }
+        // Function to close the confirmation modal
+
+
+
+        function openModal() {
+            const confirmationModal = document.getElementById('Logout-modal');
+            if (confirmationModal) {
+                confirmationModal.style.display = 'flex';
+                const logoutButton = document.getElementById('logout-btn');
+                const cancelButton = document.querySelector('.logout-Cancel-btn');
+
+                username = getNameFromURL();
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', () => {
+                        cancelButton.classList.add('disabled')
+                        LogoutSpinner()
+                        logout(username);
+
+
+                    });
+                }
+                console.log("djksfbkjsdbf");
+            } else {
+
+
+                console.error('Confirmation modal not found.');
+
+            }
+        }
+
+        function toogle(index) {
+            const admintoggle = document.querySelectorAll(".admin-toggle")
+             admintoggle.forEach((checkbox, idx) => {
+                 if (idx == index) {
+                    username = usersData.users[index].cognito_user;
+                    var toggleValue = (typeof(usersData.users[index].make_admin) === "undefined" || (!usersData.users[index].make_admin.BOOL) ? false : true);
+                    if (toggleValue) {
+                        console.log("toggle working")
+                       
+                        removeadmin(username);
+                    }
+                    else{
+                        console.log("toggle working123")
+            
+                        OpenAdminModal(username);
+                        //CloseAdminModal(username)
+            
+                    }
+                }
+              
+            });
+        }
+ 
+
+
+function OpenAdminModal(username) {
+    document.getElementById('delete-username').innerText = username;
+    document.getElementById('admin-modal').style.display = 'flex';
+    adminconfirm = document.getElementById('admin-confirm');
+    adminconfirm.addEventListener('click', function() {
+        console.log("make as admin")
+        makeadmin(username);
+       closeAdminModalModal();
+   });        
+
+                
+              
+}
+
+
+function closeAdminModalModal() {
+    document.getElementById('admin-modal').style.display = 'none';
+}
+
+
+
+
+document.getElementById('cancel-btn').addEventListener('click', function() {
+    closeAdminModalModal();
+});
+
+window.onclick = function(event) {
+    var modal = document.getElementById('admin-modal');
+    if (event.target == modal) {
+        closeAdminModalModal();
+    }
+}
+
+
+
+
+
+
+
+
+ 
+        function makeadmin(username) {
+             console.log("username checked ", username)
+            const params = {
+                method: 'POST',
+                body: JSON.stringify({ username: username.S }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+ 
+ 
+            fetch('https://xqbv406vi5.execute-api.us-east-2.amazonaws.com/Sionyx/Make_User_Admin', params)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success for make admin:', data);
+                })
+                .catch((error) => {
+                    console.error('Error for make admin:', error);
+                });
+ 
+        }
+ 
+ 
+ 
+ 
+        function removeadmin(username) {
+             console.log("username is no checked ", username)
+            const params = {
+                method: 'POST',
+                body: JSON.stringify({ username: username.S }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+ 
+ 
+            fetch('https://keg4uzh1od.execute-api.us-east-2.amazonaws.com/SIonyx/Remove_user_admin', params)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success for remove admin:', data);
+                })
+                .catch((error) => {
+                    console.error('Error for remove admin:', error);
+                });
+ 
+        }
+
+
+        function closeModal() {
+            const confirmModal = document.getElementById('Logout-modal');
+            if (confirmModal) {
+                confirmModal.style.display = 'none';
+            } else {
+                console.error('Confirmation modal not found.');
+            }
+        }
+
+
+
+
+        function myFunction() {
+            var x = document.getElementById("snackbar");
+            var y = document.getElementById("snackbarMob");
+
+            y.className = "show";
+            x.style.visibility = 'visible'
+            y.style.visibility = 'visible'
+            setTimeout(function () {
+                x.style.visibility = 'hidden'
+                y.style.visibility = 'hidden'
+
+            }, 3000);
+        }
+
+
+
+
+        function showSpinnerAndRedirect() {
+            const spinner = document.getElementById('spinner');
+            spinner.style.display = 'block';
+
+
+
+            setTimeout(() => {
+
+                window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+            }, 45000);
+        }
+
+
+        window.onload = showSpinnerAndRedirect;
+
+
+        function getDeviceCount(user) {
+            let totalCount = 0;
+
+            if (user.Aurora && user.Aurora.S) {
+                const auroraCount = user.Aurora.S.split(':').length;
+                totalCount += auroraCount;
+            }
+
+            if (user.Opsin && user.Opsin.S) {
+                const opsinCount = user.Opsin.S.split(':').length - 1;
+                totalCount += opsinCount;
+            }
+
+            if (user.Nightwave && user.Nightwave.S) {
+                const nightwaveCount = user.Nightwave.S.split(':').length - 1;
+                totalCount += nightwaveCount;
+            }
+
+            return totalCount / 4;
+        }
+
+
+
+        function openConfirmationModal(username, userDiv) {
+            console.log("chcek the value", userDiv)
+            const confirmationModal = document.getElementById('confirmation-modal');
+            const cancelButton = document.querySelector('.cancel-btn');
+
+            if (confirmationModal) {
+                const deleteUsernameSpan = document.getElementById('delete-username');
+                if (deleteUsernameSpan) {
+                    deleteUsernameSpan.textContent = username;
+                    confirmationModal.style.display = 'flex';
+
+                    // Disable cancel button
+
+
+                    const deleteButton = document.getElementById('delete-btn');
+                    if (deleteButton) {
+                        deleteButton.addEventListener('click', () => {
+
+                            cancelButton.classList.add('disabled')
+
+                            showSpinner();
+                            console.log("chcek the value", userDiv)
+
+                            deleteUser(username, userDiv);
+                        });
+                    } else {
+                        console.error('Delete button not found.');
+                    }
+                } else {
+                    console.error('Delete username span not found.');
+                }
+            } else {
+                console.error('Confirmation modal not found.');
+            }
+        }
+
+
+
+
+
+
+        function closeConfirmationModal() {
+            const confirmationModal = document.getElementById('confirmation-modal');
+            const cancelButton = document.querySelector('.cancel-btn');
+
+            if (confirmationModal && cancelButton) {
+                confirmationModal.style.display = 'none';
+                // Enable cancel button
+                cancelButton.classList.remove('disabled');
+            } else {
+                console.error('Confirmation modal or cancel button not found.');
+            }
+        }
+
+
+
+
+        /*   document.getElementById('dashboard-link').addEventListener('click', function (event) {
+               event.preventDefault(); // Prevent the default link behavior
+   
+               const loadingText = document.getElementById('loading-text');
+               if (loadingText) {
+                   loadingText.style.display = 'block';
+               } else {
+                   console.error('Loading text element not found.');
+               }
+               // Hide user table
+               const userTable = document.querySelector('.user-table-container');
+               if (userTable) {
+                   userTable.style.display = 'none';
+               } else {
+                   console.error('User table container not found.');
+               }
+   
+   
+   
+   
+   
+               const paginationContainer = document.getElementById('paginationContainer');
+               if (paginationContainer) {
+                   paginationContainer.style.display = 'none';
+               } else {
+                   console.error('Pagination container not found.');
+               }
+   
+   
+   
+               setTimeout(() => {
+                   window.location.href = "UserDetails.html";
+               }, 500);
+           });
+   */
+
+        document.querySelector('.search-input').addEventListener('input', function (event) {
+            const inputValue = event.target.value;
+            const filteredValue = inputValue.replace(/[^\w]/g, ''); // Remove special characters and spaces
+
+            // Update input value without special characters and spaces
+            event.target.value = filteredValue;
+
+            // List all users when attempting to enter special characters or spaces
+            if (filteredValue !== inputValue) {
+                filterUsers(); // Call the filterUsers function to list all users
+            }
+        });
+
+
+
+
+
+
+
+        function filterUsers() {
+            const input = document.querySelector('.search-input');
+
+            const filter = input.value.trim().toUpperCase().replace(/[^A-Z]/g, ''); // Trim whitespace from input and remove numbers
+
+            const userList = document.getElementById('user-details-body');
+            const users = userList.getElementsByTagName('tr');
+            let visibleUserCount = 0; // Counter for visible users
+
+            // Loop through all users
+            for (let i = 1; i < users.length; i++) { // Start from index 1 to exclude header row
+                const usernameCell = users[i].getElementsByTagName('td')[0];
+                if (usernameCell) {
+                    const txtValue = usernameCell.textContent || usernameCell.innerText;
+                    const username = txtValue.trim().toUpperCase(); // Convert username to uppercase for case-insensitive comparison
+
+                    let match = true; // Assume match initially
+                    let filterIndex = 0; // Initialize filter index
+
+                    // Loop through both username and filter characters
+                    for (let j = 0; j < username.length && filterIndex < filter.length; j++) {
+                        const usernameChar = username[j];
+                        const filterChar = filter[filterIndex];
+
+                        if (usernameChar === filterChar) {
+                            filterIndex++; // Move to the next character in the filter
+                        } else {
+                            match = false; // Set match to false if characters don't match
+                            break; // Exit loop if characters don't match
+                        }
+                    }
+
+                    // Check if all characters in the filter were matched
+                    if (filterIndex !== filter.length) {
+                        match = false; // Set match to false if not all characters in the filter were matched
+                    }
+
+                    if (match) {
+                        users[i].style.display = ''; // Show user if there's a match
+                        visibleUserCount++;
+                    } else {
+                        users[i].style.display = 'none'; // Hide user if there's no match
+                    }
+                }
+            }
+
+            // Show or hide the "No users found" message based on the presence of matching users
+            const noUsersMessage = document.getElementById('no-users-message');
+            if (visibleUserCount === 0) {
+                noUsersMessage.style.display = 'block'; // Show the message if no users are visible
+            } else {
+                noUsersMessage.style.display = 'none'; // Hide the message if there are visible users
+            }
+
+            const paginationContainer = document.getElementById('paginationContainer');
+
+
+
+            if (filter === '') { // If search bar is empty
+                // Retrieve current page number from URL
+                noUsersMessage.style.display = 'none';
+                const currentPage = getCurrentPageNumber();
+                // Show the users corresponding to the retrieved page number
+                showPage(currentPage);
+
+                // Update URL with current page number
+                updateURL(currentPage);
+
+                // Show pagination container
+                paginationContainer.style.display = 'flex';
+
+                pagination();
+                // Hide no users found message
+
+
+                // Hide rows beyond 10 if there are more than 10 visible users
+                for (let i = 11; i < users.length; i++) {
+                    users[i].style.display = 'none';
+                }
+            } else { // If search bar has input
+                if (visibleUserCount === 0) { // If no users found
+                    // Show no users found message
+                    noUsersMessage.style.display = 'block';
+                    // Hide pagination container
+                    paginationContainer.style.display = 'none';
+                } else { // If users found
+                    // Hide no users found message
+                    noUsersMessage.style.display = 'none';
+                    // Hide pagination container
+                    paginationContainer.style.display = 'none';
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+
+        function deleteUser(username, userDiv) {
+
+            console.log('Deleting user:', username);
+            const data = { username: username };
+            const cancelButton = document.querySelector('.cancel-btn');
+
+            fetch(`https://qjegb7vicl.execute-api.us-east-2.amazonaws.com/Sionyx/Deleteapi`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("message", response.ok)
+                        const deleteUsernameSpan = document.getElementById('snackbar1');
+                        deleteUsernameSpan.style.innerText = "Deleted Suc"
+                        userDiv.remove();
+                        closeConfirmationModal();
+                        cancelButton.classList.remove('disabled');
+                        if (username === localStorage.getItem('username')) {
+                            window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
+                        }
+                        else {
+                            fetchAndPopulateUserList();
+                            showToast("User deleted successfully");
+                            hideSpinner();
+                        }
+
+                    } else {
+                        throw new Error('Failed to delete user');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting user:', error);
+                });
+        }
+
+        function showToast(message, callback) {
+            var toast = document.getElementById("snackbar1");
+            toast.innerHTML = message;
+            toast.className = "show";
+            setTimeout(function () {
+                toast.className = toast.className.replace("show", "");
+                if (callback && typeof callback === "function") {
+                    callback();
+                }
+            }, 3000);
+        }
+
+
+
+        function getNameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('username');
+        }
+
+
+
+        function updateProfileWithName(name) {
+            const profileSpan = document.getElementById('profile-username');
+            const profileusernames = document.getElementById('profile-usernames')
+            if (profileSpan) {
+                profileusernames.textContent = name;
+                profileSpan.textContent = name;
+                localStorage.setItem('username', name);
+            } else {
+                console.error('Profile username span not found.');
+            }
+        }
+
+
+        function getUsernameFromStorage() {
+            return localStorage.getItem('username');
+        }
+
+        const nameFromURL = getNameFromURL();
+        const storedUsername = getUsernameFromStorage();
+        if (storedUsername) {
+            updateProfileWithName(storedUsername);
+        }
+
+
+        function logout(username) {
+
+            const cancelButton = document.querySelector('.logout-Cancel-btn');
+
+            fetch('https://p9p8zffjs0.execute-api.us-east-2.amazonaws.com/Sionyx/Signout-admin', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username })
+            })
+                .then(() => {
+                    cancelButton.classList.remove('disabled')
+                    localStorage.removeItem('sessionToken');
+                    localStorage.removeItem('username');
+                    window.location.href = "AdminLogin.html";
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        updateProfileWithName(nameFromURL || storedUsername || '');
+        function updateURL(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            window.history.pushState({ path: url.href }, '', url.href);
+        }
+
+        function getCurrentPageNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            console.log("page number returned from getCurrentPageNumber(): ", page)
+            return page ? parseInt(page) : 1; // Default to page 1 if no page parameter is found
+        }
+
+
+        function redirectToCameraDetailsPage(details, page) {
+            const queryParams = new URLSearchParams(details);
+            const name = getUsernameFromStorage() || getNameFromURL();
+            queryParams.append('name', name);
+            queryParams.append('page', page);
+            window.location.href = `CameraUserdetails.html?${queryParams.toString()}`;
+        }
+
+        window.onload = fetchAndPopulateUserList;
+        function updateURL(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            window.history.pushState({ path: url.href }, '', url.href);
+        }
+
+
+
+
+
+        function getCurrentPageNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            return page ? parseInt(page) : 1;
+        }
+
+
+
+
+
+
+        function pagination() {
+            console.log("from pagination totalUserListFromDb :", totalUserListFromDb)
+
+            var table = document.getElementById('user-details-body');
+            var rows = table.getElementsByTagName('tr');
+            console.log("rows!!!!!!!!!!!!!!!!!!!!!!!", table)
+            var rowsPerPage = 10;
+
+
+
+
+            var pageCount = Math.ceil((totalUserListFromDb) / 10);
+            // var pageCount = 2
+
+            console.log("from pagination pagecount: ", pageCount)
+            if (pageCount <= 1) {
+                const paginationContainer = document.getElementById('paginationContainer');
+                paginationContainer.style.display = 'none';
+            }
+            var currentPage = getCurrentPageNumber();
+            console.log("from pagination currnet page:", currentPage)
+
+            var startPage = currentPage;
+            var endPage = pageCount;
+            console.log("from pagination end page:", endPage, "start page: ", startPage)
+
+            if (endPage - startPage < 9) {
+                startPage = Math.max(1, endPage - 9);
+                console.log("from pagination fewwr than 10: ", startPage)
+            }
+
+
+            var pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            for (var i = startPage; i <= endPage; i++) {
+                var link = document.createElement('a');
+                link.textContent = i;
+                link.href = '#';
+                if (i === currentPage) {
+                    link.classList.add('active');
+                }
+
+                link.addEventListener('click', function () {
+                    var page = parseInt(this.textContent);
+                    updateURL(page);
+                    showPage(page);
+                    setActiveLink(page);
+                });
+
+                pagination.appendChild(link);
+            }
+
+
+            var prevButton = document.createElement('a');
+            prevButton.textContent = '<<';
+            prevButton.href = '#';
+            prevButton.addEventListener('click', function () {
+                console.log("from previous getCurrentPageNumber: ", getCurrentPageNumber())
+                console.log("from previous current: ", currentPage)
+                currentPage = getCurrentPageNumber()
+                if (currentPage > 1) {
+                    console.log("from previous entered current page if")
+                    currentPage--; // Decrement currentPage by 1
+                    updateURL(currentPage); // Update URL with previous page number
+                    showPage(currentPage);
+                    setActiveLink(currentPage);
+                }
+            });
+
+
+
+            // Insert "Previous" button before the first pagination link
+            if (pagination.firstChild) {
+                pagination.insertBefore(prevButton, pagination.firstChild);
+            } else {
+                pagination.appendChild(prevButton);
+            }
+
+
+            var nextButton = document.createElement('a');
+            nextButton.textContent = '>>';
+            nextButton.href = '#';
+            nextButton.addEventListener('click', function () {
+                console.log(" from nxt current: ", currentPage)
+                currentPage = getCurrentPageNumber()
+                if (currentPage < pageCount) {
+                    currentPage++; // Increment currentPage by 1
+                    console.log(" from nxt after increment current: ", currentPage)
+                    updateURL(currentPage); // Update URL with next page number
+                    showPage(currentPage);
+                    setActiveLink(currentPage);
+                }
+            });
+
+            // Adjust currentPage based on the active link
+            var activeLink = pagination.querySelector('.active');
+            if (activeLink) {
+                var activePage = parseInt(activeLink.textContent);
+                prevButton.addEventListener('click', function () {
+                    if (activePage > 1) {
+                        activePage--; // Decrement activePage by 1
+                        currentPage = activePage;
+                    }
+                });
+                nextButton.addEventListener('click', function () {
+                    if (activePage < pageCount) {
+                        activePage++; // Increment activePage by 1
+                        currentPage = activePage;
+                    }
+                });
+            }
+
+
+            pagination.appendChild(nextButton);
+
+            // Show the current page's results
+            showPage(currentPage);
+            setActiveLink(Page);
+        }
+
+
+        function showPage(page) {
+            var table = document.getElementById('user-list');
+            var rows = table.getElementsByTagName('tr');
+            var rowsPerPage = 10;
+            var totalPages = Math.ceil((rows.length - 1) / rowsPerPage);
+            console.log(" from showpage() page: ", page)
+            console.log(" from showpage() row.length: ", rows.length)
+            var startIndex = (page - 1) * rowsPerPage + 1
+            var endIndex = (page * rowsPerPage);
+            console.log("rows.length - totalPages ", rows.length, "  totaalpages", rows.length - totalPages)
+            console.log(" from showpage() startIndex: ", startIndex)
+            console.log(" from showpage() endIndex: ", endIndex)
+
+            // Calculate the end index for showing results up to current page + 6 pages
+
+            var endPageIndex = Math.min(endIndex + 6 * rowsPerPage, totalPages * rowsPerPage);
+            var totalRows = rows.length - totalPages;
+
+            for (var i = 1; i < rows.length; i++) {
+
+                if ((i === 1) && (getCurrentPageNumber() === 1)) {
+                    rows[i].style.display = '';
+                    console.log("display show", i)
+                } else {
+                    if (i >= startIndex + 1 && i <= endIndex + 1) {
+                        rows[i].style.display = '';
+                        console.log("display show", i)
+                    } else {
+                        rows[i].style.display = 'none';
+                        console.log("display none", i)
+                    }
+                }
+
+
+
+
+
+            }
+
+            // Update the result info 
+            var resultInfo = document.getElementById('result-info');
+            if (totalPages > 0) {
+                resultInfo.textContent = `Showing results ${startIndex} to ${Math.min(page * rowsPerPage, totalUserListFromDb)} out of ${totalUserListFromDb} entries`;
+            }
+        }
+
+
+        function setActiveLink(page) {
+            const pagination = document.getElementById('pagination');
+            const links = pagination.getElementsByTagName('a');
+            console.log("from setActiveLink links.length:", links.length)
+            for (let i = 0; i < links.length; i++) {
+                console.log("from setActiveLink:", i)
+                links[i].classList.remove('active');
+            }
+            links[page].classList.add('active');
+        }
+
+        link.addEventListener('click', function () {
+            var page = parseInt(this.textContent);
+            showPage(page);
+            setActiveLink(page);
+            updateURL(page); // Update URL with current page number
+        });
+        const currentPage = getCurrentPageNumber();
+        showPage(currentPage);
+        setActiveLink(currentPage);
+
+        function updateURL(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            window.history.pushState({ path: url.href }, '', url.href);
+        }
+
+
+        const paginationLinks = document.getElementById('pagination').getElementsByTagName('a');
+        for (let i = 0; i < paginationLinks.length; i++) {
+            paginationLinks[i].addEventListener('click', function () {
+                const page = parseInt(this.textContent);
+                showPage(page);
+                setActiveLink(page);
+                updateURL(getCurrentPageNumber());
+
+                this.classList.add('pagination-link-clicked');
+                for (let j = 0; j < paginationLinks.length; j++) {
+                    if (j !== i) {
+                        paginationLinks[j].classList.remove('pagination-link-clicked');
+                    }
+                }
+            });
+        }
+
+
+        function updateResultInfo() {
+            const currentPage = getCurrentPageNumber();
+            const totalRows = rows.length - 1; // Exclude header row
+
+            const startIndex = (currentPage - 1) * rowsPerPage + 1;
+            let endIndex = currentPage * rowsPerPage;
+            endIndex = Math.min(endIndex, totalRows);
+
+            const resultInfo = document.getElementById('result-info');
+            resultInfo.textContent = `Showing results ${startIndex} to ${endIndex} out of ${totalRows}`;
+        }
+
+        function showSpinner() {
+            var button = document.getElementById('delete-btn');
+            button.disabled = true;
+            button.innerHTML = '<div class="spinner"></div>';
+        }
+
+        function hideSpinner() {
+            var button = document.getElementById('delete-btn');
+            button.disabled = false;
+            button.innerHTML = 'Delete';
+        }
+
+
+        function LogoutSpinner() {
+            var button = document.getElementById('logout-btn');
+            button.innerHTML = '<div class="spinner"></div>';
+
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

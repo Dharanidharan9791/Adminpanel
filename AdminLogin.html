@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIONYX Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preload" href="UserDetails.html" as="document">
+    <link rel="stylesheet" href="AdminLogin.css">
+    <link rel="stylesheet" href="https://use.typekit.net/rxm7ono.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"> -->
+
+
+
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="logoContainer">
+            <div class="logo-login">
+            
+
+            </div>
+        </div>
+       
+
+        <div class="formContainer">
+            <div id="loginalign">
+
+                <div class="welcomeTextContainer">
+                    <h2
+                        style=" letter-spacing: 0.58px; color: #FFFFFF; opacity: 1; font-size:31px;margin-top:10px;margin-bottom:10px ">
+                        Welcome to Admin Panel</h2>
+                    <small style="color: #B0B0B0;font-size: 17px; opacity:0.8">
+                        Please enter your login details to access your account.
+                    </small>
+
+                </div>
+                <span class="error-message" id="error-message" style="display: none;">Invalid username or
+                    password.</span>
+                <span class="username-error" id="username-error" style="display: none;">Please fill username.</span>
+                <span class="password-error" id="password-error" style="display: none;">Please fill password.</span>
+                <span class="fill-all-fields-error" id="fill-all-fields-error" style="display: none;">Please fill required fields.</span>
+                
+
+                
+
+            </div>
+            <form id="login-form" autocomplete="off">
+                <div class="input-with-icon">
+                    <img class="input-icon" src="icon_username-1.svg" alt="Username Icon">
+                    <input id="username" type="text" placeholder="Username" maxlength="12" autocomplete="off" required
+                        onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" style="outline: none">
+                </div>
+
+                <div class="input-with-icon">
+                    <img class="input-icon" src="icon-password.svg" alt="Password Icon">
+                    <input id="password" type="password" placeholder="Password" autocomplete="off" maxlength="12"
+                        required onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" style="outline: none">
+                </div>
+
+
+
+
+
+                <div class="parent">
+                    <label class="show-password-label">
+                        <input type="checkbox" id="show-password-checkbox" class="show-password-checkbox">
+                        <span class="custom-checkbox">
+
+                            <span class="tick-mark">✔</span>
+                        </span>
+                        Show Password
+                    </label>
+                </div>
+
+                <button type="submit" style=" position: relative;" id="login-button">
+                    <span id="login-text">Login</span>
+
+                    <span class="loading-spinner" id="loading-spinner"></span>
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+
+<script>
+
+    //restricting white space in Username
+    var inp =  document.querySelector('#username');
+    inp.addEventListener("keypress",function(e){
+    var key = e.keyCode;
+    if(key === 32){
+    e.preventDefault();
+    return false;
+    }
+    })
+
+    //restricting white space in password
+    var inp =  document.querySelector('#password');
+    inp.addEventListener("keypress",function(e){
+    var key = e.keyCode;
+    if(key === 32){
+    e.preventDefault();
+    return false;
+    }
+    })
+
+
+
+
+
+    // Function to check if both username and password fields are empty
+    function checkEmptyFields() {
+        console.log('check empty fields');
+        var username = document.getElementById('username').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var usernameError = document.getElementById('username-error');
+        var passwordError = document.getElementById('password-error');
+        var fillAllFieldsError = document.getElementById('fill-all-fields-error');
+        var errorMessage = document.getElementById('error-message');
+
+        usernameError.style.display = 'none';
+        passwordError.style.display = 'none';
+        fillAllFieldsError.style.display = 'none';
+
+        // Show message if username is empty
+        if (username === '' && password !== '') {
+            usernameError.style.display = 'block';
+            passwordError.style.display = 'none';
+            fillAllFieldsError.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+        }
+
+        // Show message if password is empty
+        else if (password === '' && username !== '') {
+            console.log("colour")
+            errorMessage.style.display = 'none';
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'block';
+            fillAllFieldsError.style.display = 'none';
+
+
+
+        }
+
+        // Show message if both fields are empty
+        else if (username === '' && password === '') {
+            fillAllFieldsError.style.display = 'block';
+            // Hide other error messages
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+        }
+        
+    }
+    // Add input event listeners to both username and password fields
+    document.getElementById('username').addEventListener('input', checkEmptyFields);
+    document.getElementById('password').addEventListener('input', checkEmptyFields);
+
+
+    // Function to submit the form
+    function submitForm(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const usernameError = document.getElementById('username-error');
+        const passwordError = document.getElementById('password-error');
+        const fillAllFieldsError = document.getElementById('fill-all-fields-error');
+        const errorMessage = document.getElementById('error-message');
+        const loginText = document.getElementById('login-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        // Check if either username or password field is empty
+        if (username === '' || password === '') {
+            // Display appropriate error messages
+            if (username === '' && password !== '') {
+                fillAllFieldsError.style.display = 'none';
+                usernameError.style.display = 'block';
+                passwordError.style.display = 'none';
+
+
+            }
+            else if (password === '' && username !== '') {
+                fillAllFieldsError.style.display = 'none';
+                passwordError.style.display = 'block';
+                usernameError.style.display = 'none';
+
+
+            }
+           // if (username === '' || password === '')
+            else  {
+                fillAllFieldsError.style.display = 'block';
+                usernameError.style.display = 'none';
+                passwordError.style.display = 'none';
+
+
+            }
+            return;
+        }
+
+        // Hide all error messages
+        usernameError.style.display = 'none';
+        passwordError.style.display = 'none';
+        fillAllFieldsError.style.display = 'none';
+        errorMessage.style.display = 'none';
+
+
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const loginText = document.getElementById('login-text');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const data = {
+                username: username,
+                password: password
+            };
+
+            // Hide login text and show loading spinner
+            loginText.style.display = 'none';
+            loadingSpinner.style.display = 'inline-block';
+
+            fetch('https://6vrs711y1m.execute-api.us-east-2.amazonaws.com/UserAdmin/AdminLoginAPI', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to login: ' + response.statusText);
+                    }
+                })
+                .then(data => {
+                    const token = data.session_token;
+                    const encodedUsername = encodeURIComponent(username);
+                    // Pass both token and username to the protected page
+                    console.log("Login successful! Welcome Admin!");
+                    localStorage.setItem('sessionToken', token);
+                    if (!token) {
+                        location.replace = `AdminLogin.html`;
+                    }
+                    else {
+                        window.location.href = `UserDetails.html?token=${token}&username=${encodedUsername}`;
+                    }
+
+                })
+                .catch(error => {
+                    console.error('Failed to login:', error.message);
+                    errorMessage.textContent = 'Invalid username or password';
+                    errorMessage.style.display = 'block';
+                })
+                .finally(() => {
+                    // Show login text and hide loading spinner
+                    loginText.style.display = 'inline-block';
+                    loadingSpinner.style.display = 'none';
+                });
+
+        });
+    });
+
+
+
+    function clearPlaceholder(input) {
+        input.placeholder = '';
+    }
+
+    function restorePlaceholder(input) {
+        if (!input.value) {
+            if (input.id === 'username') {
+                input.placeholder = 'Username';
+            } else if (input.id === 'password') {
+                input.placeholder = 'Password';
+            }
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const passwordInput = document.getElementById('password');
+        const showPasswordCheckbox = document.getElementById('show-password-checkbox');
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            if (showPasswordCheckbox.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    });
+</script>
