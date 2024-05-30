@@ -1,0 +1,143 @@
+{
+    "totalUsers": 2565,
+    "userAsPerDevice": [
+        {
+            "name": "Android",
+            "noofUsers": 25
+        },
+        {
+            "name": "iOS",
+            "noofUsers": 69
+        },
+        {
+            "name": "Others",
+            "noofUsers": 56
+        }
+    ],
+    "userStatus": {
+        "online": 231,
+        "offline": 100
+    },
+    "topUsedDevices": [
+        {
+            "name": "NightWave",
+            "location": "USA",
+            "toatlProducts": 200
+        },
+        {
+            "name": "Opsin",
+            "location": "India",
+            "toatlProducts": 400
+        },
+        {
+            "name": "Aurora",
+            "location": "Canada",
+            "toatlProducts": 20
+        },
+        {
+            "name": "Opsin",
+            "location": "USA",
+            "toatlProducts": 256
+        }
+    ],
+    "deviceRatio": [
+        {
+            "name": "Android",
+            "percentage": "25%"
+        },
+        {
+            "name": "iOS",
+            "percentage": "69%"
+        },
+        {
+            "name": "Others",
+            "percentage": "56%"
+        }
+    ],
+    "pieChartData": {
+        "data": [
+            [
+                "Camera Name",
+                "No of cameras"
+            ],
+            [
+                "Opsin",
+                25
+            ],
+            [
+                "NightWave",
+                30
+            ],
+            [
+                "Arora",
+                15
+            ]
+        ],
+        "colors": {
+            "0": {
+                "color": "#00A9FF"
+            },
+            "1": {
+                "color": "#FAAF00"
+            },
+            "2": {
+                "color": "#86A789"
+            }
+        }
+    },
+    "geoChartData": [
+        [
+            "Country",
+            "No. of users"
+        ],
+        [
+            "Germany",
+            {
+                "v": 400,
+                "f": "400"
+            }
+        ],
+        [
+            "United States",
+            {
+                "v": 400,
+                "f": "200"
+            }
+        ],
+        [
+            "Brazil",
+            {
+                "v": 400,
+                "f": "150"
+            }
+        ],
+        [
+            "Australia",
+            {
+                "v": 400,
+                "f": "280"
+            }
+        ],
+        [
+            "France",
+            {
+                "v": 400,
+                "f": "300"
+            }
+        ],
+        [
+            "Russia",
+            {
+                "v": 400,
+                "f": "500"
+            }
+        ],
+        [
+            "India",
+            {
+                "v": 400,
+                "f": "690"
+            }
+        ]
+    ]
+}

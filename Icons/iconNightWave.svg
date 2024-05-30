@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_901" data-name="Rectangle 901" width="32" height="32" transform="translate(300 622)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Rectangle_165" data-name="Rectangle 165" d="M14,0h0A14,14,0,0,1,28,14V27.644A4.356,4.356,0,0,1,23.644,32H4.356A4.356,4.356,0,0,1,0,27.644V14A14,14,0,0,1,14,0Z" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="icon_cameraType" data-name="icon/cameraType" transform="translate(-300 -622)" clip-path="url(#clip-path)">
+    <g id="_32x32" data-name="32x32" transform="translate(-10166 -3001)">
+      <g id="Rectangle_166" data-name="Rectangle 166" transform="translate(10466 3623)" fill="rgba(255,255,255,0)" stroke="rgba(112,112,112,0)" stroke-width="1">
+        <rect width="32" height="32" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" height="31" fill="none"/>
+      </g>
+      <g id="nightWave" transform="translate(10468 3623)">
+        <path id="Rectangle_163" data-name="Rectangle 163" d="M14,0h0A14,14,0,0,1,28,14V27.644A4.356,4.356,0,0,1,23.644,32H4.356A4.356,4.356,0,0,1,0,27.644V14A14,14,0,0,1,14,0Z" transform="translate(0 0)" fill="#fff"/>
+        <g id="Mask_Group_10" data-name="Mask Group 10" transform="translate(0)" clip-path="url(#clip-path-2)">
+          <path id="Rectangle_164" data-name="Rectangle 164" d="M0,0H18a0,0,0,0,1,0,0V11a9,9,0,0,1-9,9H9a9,9,0,0,1-9-9V0A0,0,0,0,1,0,0Z" transform="translate(5 0)" fill="#040606"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

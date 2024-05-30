@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_911" data-name="Rectangle 911" width="32" height="32" transform="translate(300 622)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="icon_cameraType" data-name="icon/cameraType" transform="translate(-300 -622)" clip-path="url(#clip-path)">
+    <g id="_32x32" data-name="32x32" transform="translate(-10166 -2639)">
+      <g id="Rectangle_152" data-name="Rectangle 152" transform="translate(10466 3261)" fill="rgba(255,255,255,0)" stroke="rgba(112,112,112,0)" stroke-width="1">
+        <rect width="32" height="32" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" height="31" fill="none"/>
+      </g>
+      <g id="Group_226" data-name="Group 226" transform="translate(10372 2814.814)">
+        <path id="Rectangle_184" data-name="Rectangle 184" d="M2.233,0H6.7V13.4H2.233A2.233,2.233,0,0,1,0,11.163V2.233A2.233,2.233,0,0,1,2.233,0Z" transform="translate(94 455.488)" fill="#fff"/>
+        <rect id="Rectangle_185" data-name="Rectangle 185" width="1.488" height="13.395" transform="translate(97.721 455.488)" fill="#888"/>
+        <path id="Rectangle_186" data-name="Rectangle 186" d="M0,0H2.977A2.233,2.233,0,0,1,5.209,2.233V8.186a2.233,2.233,0,0,1-2.233,2.233H0Z" transform="translate(120.791 456.977)" fill="#fff"/>
+        <rect id="Rectangle_187" data-name="Rectangle 187" width="21.581" height="16.372" rx="3" transform="translate(99.953 454)" fill="#fff"/>
+        <rect id="Rectangle_188" data-name="Rectangle 188" width="15.628" height="8.186" rx="1" transform="translate(102.93 459.209)" fill="#888"/>
+        <circle id="Ellipse_70" data-name="Ellipse 70" cx="2.977" cy="2.977" r="2.977" transform="translate(111.116 460.698)" fill="#171717"/>
+      </g>
+    </g>
+  </g>
+</svg>

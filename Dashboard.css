@@ -1,0 +1,78 @@
+.dashboardContent {
+    padding: 10px 20px;
+    
+}
+
+.cardsContainer {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+
+.cardRows1 {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 25% 30% 40%;
+    gap: 20px;
+    padding: 10px 0;
+
+}
+
+.cardRows2 {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 30% 40% 25%;
+    padding: 10px 0;
+    gap: 20px;
+}
+
+.activeStatusCards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cards {
+    background-color: rgb(255, 255, 255);
+    height:-webkit-fill-available;
+    border-radius: 10px;
+}
+.innerCard{
+    background-color: rgb(184, 248, 159);
+    height: 100%;
+    margin: 20px;
+}
+.totalUsersCard{
+    display: grid;
+    grid-template-rows: 50% 50%;
+    height: 100%;
+}
+.toatlUsers{
+padding: 30px;
+}
+.usersByMobile{
+    border-top: 2px dashed;
+    border-color: #c2c2c2;
+    padding: 20px;
+}
+#myChart {
+    height: 360px !important;
+    width: 360px !important;
+}
+.errorContainer{
+    background-color: #F5BFBF;
+    color: #D80000;
+    padding: 5px 10px;
+    border-radius: 5px ;
+    margin-top: 10px ;
+}
+.successContainer{
+    background-color: #C9E7BF;
+    color: #2AA100;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}

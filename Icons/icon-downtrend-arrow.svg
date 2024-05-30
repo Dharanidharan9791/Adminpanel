@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_898" data-name="Rectangle 898" width="18" height="18" transform="translate(862 339)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="icon_downtrend-arrow" data-name="icon/downtrend-arrow" transform="translate(-862 -339)" clip-path="url(#clip-path)">
+    <path id="Path_954" data-name="Path 954" d="M8.438,13.977a.456.456,0,0,0,.645,0l4.562-4.562A.456.456,0,1,0,13,8.771L9.217,12.554V2.707a.456.456,0,0,0-.912,0v9.847L4.521,8.771a.456.456,0,1,0-.645.645l4.562,4.562Z" transform="translate(862.24 339.819)" fill="#d80000" fill-rule="evenodd"/>
+  </g>
+</svg>
