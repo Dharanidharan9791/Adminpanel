@@ -379,6 +379,24 @@ td {
   justify-content: center;
   align-items: center;
 }
+.admin-contentt {
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-contentt {
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
 
@@ -495,6 +513,40 @@ p {
   margin: 0;
 
 }
+#admin-modall {
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#admin-modall button {
+
+  border: none;
+}
+#admin-modall .admin-contentt p {
+
+  padding: 15px;
+  margin: 0;
+
+}
+p {
+
+  padding: 0;
+  margin: 0;
+
+}
+
+
+
+
+
 .modal-header h2 {
   margin: 0;
 }

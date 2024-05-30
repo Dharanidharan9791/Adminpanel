@@ -270,23 +270,23 @@
             <br>
             <div class="redirect-container">
                 <a id="dashboard-link"
-        href="Dashboard.html"
-        style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
-        <div style="display: inline-block;text-overflow:ellipsis"
-            onmouseout="document.getElementById('dashboard-link').style.color='black'">
-            <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
+        href="Dashboard.html">
+        <div style="display: inline-block;text-overflow:ellipsis;"  onmouseover="document.getElementById('dashboard-link').style.color='black';"
+            onmouseout="document.getElementById('dashboard-link').style.color='white'">
+            <i class="fas fa-tachometer-alt icon" style="color: rgb(148, 148, 148);"></i>Dashboard
         </div>
     </a>
 
 
 
-    <a href="UserDetails.html" ><i class="fas fa-user-plus icon"
-        style="color: rgb(148, 148, 148)"></i>Users</a>
+    <a href="UserDetails.html" ><i class="fas fa-users"
+        style="color: rgb(148, 148, 148); margin-right:8px;"></i>Users</a>
 
                 <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
                 <div id="snackbar">Still in implementation!</div>
                 <div id="snackbar1"></div>
+                <div id="snackbar2"></div>
             </div>
             <div class="footer">
                 <div class="profile footerUserDetails">
@@ -337,6 +337,7 @@
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
                 <div id="snackbarMob">Still in implementation!</div>
                 <div id="snackbar1"></div>
+                <div id="snackbar2"></div>
             </div>
             <div class="footer">
                 <div class="profile footerUserDetails">
@@ -466,6 +467,8 @@
             <div></div>
             <div></div>
             <div></div>
+            <div></div>
+            <div></div>
         </div>
 
        
@@ -496,10 +499,11 @@
             <div class="admin-content">
                 <p id="adminsure"><b>Are you sure you want to change admin status for the user <span id="admin-username"></span>?</b></p>
                 <div class="button-container">
-                    <button class="admin-confirm" id="admin-confirm" style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box;color:#fff; border-radius: 5px; opacity: 1;"
+                    <button class="admin-confirm" id="admin-confirm" onclick="show_admin_Spinner()" style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box;color:#fff; border-radius: 5px; opacity: 1;"
                     onmouseover="this.style.backgroundColor='#ff3333'"
-                    onmouseout="this.style.backgroundColor='#D80000'">Confirm</button>
-                    <button class="admin-btn" id="cancel-btn" style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
+                    onmouseout="this.style.backgroundColor='#D80000'"><span id="confirm-text"></span>Confirm</button>
+                    <span id="confirmm-spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+                    <button class="cancell-btn" id="cancell-btn" style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
                     onmouseover="this.style.backgroundColor='#999'"
                     onmouseout="this.style.backgroundColor='#FFFFFF'">Cancel</button>
                 </div>
@@ -508,9 +512,32 @@
         
     </div>
 
+    <div id="admin-modall">
+        <div class="admin-contentt">
+            <p id="adminsure"><b>Are you sure you want to change admin status for the userrr <span id="admin-username"></span>?</b></p>
+            <div class="button-containerr">
+                <button class="admin-confirm" id="admin-confirm" onclick="show_admin_Spinner()"  style="top: 318px; left: 751px; width: 200px; height: 47px; background: #ac0000 0% 0% no-repeat padding-box;color:#fff; border-radius: 5px; opacity: 1;"
+                onmouseover="this.style.backgroundColor='#ff3333'"
+                onmouseout="this.style.backgroundColor='#D80000'"><span id="confirmm-text"></span>Confirm</button>
+                <span id="confirmm-spinner" style="display: none;"><i class="fas fa-spinner fa-spin" style="display: none;"></i></span>
+                <button class="admin-btnn" id="cancel-btnn" style="top: 318px; left: 966px; width: 200px; height: 47px; background: #FFFFFF 0% 0% no-repeat padding-box; border: 1px solid #252525; border-radius: 5px; opacity: 1;"
+                onmouseover="this.style.backgroundColor='#999'"
+                onmouseout="this.style.backgroundColor='#FFFFFF'">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
 
     <script>
         let usersData = null;
+ 
         function openNav() {
             document.getElementById("sidebarOffCanvas").style.display = "flex";
             // document.getElementById("BurgerIcon").style.display = "block";
@@ -575,6 +602,7 @@
                     usersData = data;
                     const userListDiv = document.getElementById('user-details-body');
                     const noUsersMessageDiv = document.getElementById('no-users-message');
+                    userListDiv.innerHTML = '';
                     if (data && data.users && Array.isArray(data.users)) {
                         if (data.users.length === 0) {
                             noUsersMessageDiv.style.display = 'block';
@@ -798,7 +826,7 @@
 
 
 
-
+        let check = true;
 
 
 
@@ -862,66 +890,110 @@
             }
         }
 
+        
+
+
+
         function toogle(index) {
             const admintoggle = document.querySelectorAll(".admin-toggle")
              admintoggle.forEach((checkbox, idx) => {
                  if (idx == index) {
                     username = usersData.users[index].cognito_user;
                     var toggleValue = (typeof(usersData.users[index].make_admin) === "undefined" || (!usersData.users[index].make_admin.BOOL) ? false : true);
+                    console.log("sjdbsjkdb", toggleValue)
+
                     if (toggleValue) {
                         console.log("toggle working")
-                       
-                        removeadmin(username);
+                       // removeadmin(username);
+                        OpenAdminModal(toggleValue)
+                
+                     
                     }
-                    else{
-                        console.log("toggle working123")
-            
-                        OpenAdminModal(username);
-                        //CloseAdminModal(username)
+                    else {
+                        //makeadmin(username);
+                        console.log("toggle working123")  
+                         OpenAdminModal(toggleValue)
+                       
             
                     }
                 }
               
             });
         }
- 
+       
+      
+
+        function OpenAdminModal(toggleValue) {
+            console.log("dhfgsfjcccccccccc",toggleValue)
+            document.getElementById('delete-username').innerText = username;
+            document.getElementById('admin-modal').style.display = 'flex';
+            document.getElementById('admin-modall').style.display = 'none';
+            const Cancellbutton = document.getElementById('cancell-btn');
+
+             //for displaying userrname in adminconfirmation.
+        
+            const adminconfirm = document.getElementById('admin-confirm');
+
+            if (adminconfirm) {
+                const adminUsernameSpan = document.getElementById('admin-username');
+                if (adminUsernameSpan) {
+                    adminUsernameSpan.textContent = username.S;
+                    adminconfirm.style.display = 'block';
+                }}
 
 
-function OpenAdminModal(username) {
-    document.getElementById('delete-username').innerText = username;
-    document.getElementById('admin-modal').style.display = 'flex';
-    adminconfirm = document.getElementById('admin-confirm');
-    adminconfirm.addEventListener('click', function() {
-        console.log("make as admin")
-        makeadmin(username);
-       closeAdminModalModal();
-   });        
+       
+           // adminconfirm.removeEventListener('click', handleAdminConfirm);
+        
+         
+            function handleAdminConfirm(event) {
+                event.stopPropagation();
+                console.log("testing tag@@@@@");
+                if (toggleValue) {
+                    console.log("remove as admin");
+                    removeadmin(username);
+                } else {
+                    console.log("make admin");
+                    makeadmin(username);
+                }
+                // Remove the event listener after the action is handled
+                adminconfirm.removeEventListener('click', handleAdminConfirm);
+                document.getElementById('cancell-btn').disabled =true;
+            }
+        
+            // Add the new event listener
+            adminconfirm.addEventListener('click', handleAdminConfirm);
+           
+        
+            console.log("Toggle value after toggling:", !toggleValue ? "true" : "false");
+        
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+        
+        
+        function closeAdminModalModal() {
+            // Hide the modal
+            
+            document.getElementById('admin-modal').style.display = 'none';
+            
+            const cancellButton = document.getElementById('cancell-btn');
+            if (cancellButton) {
+                cancellButton.disabled = false;
+            }
+        }
 
-                
-              
-}
-
-
-function closeAdminModalModal() {
-    document.getElementById('admin-modal').style.display = 'none';
-}
-
-
-
-
-document.getElementById('cancel-btn').addEventListener('click', function() {
-    closeAdminModalModal();
-});
-
-window.onclick = function(event) {
-    var modal = document.getElementById('admin-modal');
-    if (event.target == modal) {
-        closeAdminModalModal();
-    }
-}
-
-
-
+        document.getElementById('cancell-btn').addEventListener('click', function() {
+            closeAdminModalModal();
+            fetchAndPopulateUserList();
+          
+        });
+        window.onclick = function(event) {
+            var modal = document.getElementById('admin-modal');
+            if (event.target == modal) {
+             //   closeAdminModalModal();
+            }
+        }
+  
 
 
 
@@ -929,7 +1001,9 @@ window.onclick = function(event) {
 
  
         function makeadmin(username) {
-             console.log("username checked ", username)
+        
+            show_admin_Spinner();
+            console.log("username checkeddddddd ", username)
             const params = {
                 method: 'POST',
                 body: JSON.stringify({ username: username.S }),
@@ -943,9 +1017,19 @@ window.onclick = function(event) {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success for make admin:', data);
+                    username='';
+                    fetchAndPopulateUserList();
+                    closeAdminModalModal();
+                    hide_admin_Spinner();
+                     
+                     check = true;
+                     
+
                 })
                 .catch((error) => {
                     console.error('Error for make admin:', error);
+                    hideSpinnerr();
+                    username='';
                 });
  
         }
@@ -954,6 +1038,7 @@ window.onclick = function(event) {
  
  
         function removeadmin(username) {
+            show_admin_Spinner();
              console.log("username is no checked ", username)
             const params = {
                 method: 'POST',
@@ -968,6 +1053,15 @@ window.onclick = function(event) {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success for remove admin:', data);
+                    username='';
+                    
+                    fetchAndPopulateUserList();
+                    closeAdminModalModal();
+                    hide_admin_Spinner();
+                    
+                    check = true;
+                    
+       
                 })
                 .catch((error) => {
                     console.error('Error for remove admin:', error);
@@ -1011,11 +1105,10 @@ window.onclick = function(event) {
 
 
 
-            setTimeout(() => {
-
+           
                 window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
-            }, 45000);
-        }
+            }
+        
 
 
         window.onload = showSpinnerAndRedirect;
@@ -1277,6 +1370,7 @@ window.onclick = function(event) {
                         const deleteUsernameSpan = document.getElementById('snackbar1');
                         deleteUsernameSpan.style.innerText = "Deleted Suc"
                         userDiv.remove();
+                        //userDiv.make_admin.BOOL = false;
                         closeConfirmationModal();
                         cancelButton.classList.remove('disabled');
                         if (username === localStorage.getItem('username')) {
@@ -1285,7 +1379,7 @@ window.onclick = function(event) {
                         else {
                             fetchAndPopulateUserList();
                             showToast("User deleted successfully");
-                            hideSpinner();
+                            hideSpinnerr();
                         }
 
                     } else {
@@ -1641,6 +1735,9 @@ window.onclick = function(event) {
             button.disabled = true;
             button.innerHTML = '<div class="spinner"></div>';
         }
+        
+
+
 
         function hideSpinner() {
             var button = document.getElementById('delete-btn');
@@ -1648,12 +1745,27 @@ window.onclick = function(event) {
             button.innerHTML = 'Delete';
         }
 
+        function show_admin_Spinner() {
+            var button = document.getElementById('admin-confirm');
+            button.disabled = true;
+            button.innerHTML = '<div class="spinner"></div>';
+        }
+        
+        function hide_admin_Spinner() {
+            var button = document.getElementById('admin-confirm');
+            button.disabled = false;
+            button.innerHTML = 'Confirm';
+         
+        }
+
+
 
         function LogoutSpinner() {
             var button = document.getElementById('logout-btn');
             button.innerHTML = '<div class="spinner"></div>';
 
         }
+        
     </script>
 
 
