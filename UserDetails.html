@@ -707,12 +707,24 @@
                                                             `;
                                     statusTd.classList.add('makeadmin-td')
 
+                                      const sliderRound = statusTd.querySelector('.slider.round');
+                                     const checkbox = statusTd.querySelector('.admin-toggle');
 
-                                    statusTd.addEventListener('click', (event) => {
+                                   if (sliderRound) {
+                                   sliderRound.addEventListener('click', (event) => {
+                                   event.preventDefault(); 
+                                   event.stopPropagation(); 
+                                   checkbox.checked = !checkbox.checked; 
+                                   toogle(index);
+                                   });
+                                    }
+
+
+                                   /*statusTd.addEventListener('click', (event) => {
                                         event.stopPropagation();
                                         toogle(index)
  
-                                    });
+                                    });*/
 
                                     const deviceCountTd = document.createElement('td');
                                     deviceCountTd.style.textAlign = 'left';
@@ -1138,32 +1150,26 @@
 
 
         function openConfirmationModal(username, userDiv) {
-            console.log("chcek the value", userDiv)
+            console.log("check the value", userDiv);
             const confirmationModal = document.getElementById('confirmation-modal');
             const cancelButton = document.querySelector('.cancel-btn');
-
+            const deleteButton = document.getElementById('delete-btn');
+        
             if (confirmationModal) {
                 const deleteUsernameSpan = document.getElementById('delete-username');
                 if (deleteUsernameSpan) {
                     deleteUsernameSpan.textContent = username;
                     confirmationModal.style.display = 'flex';
-
-                    // Disable cancel button
-
-
-                    const deleteButton = document.getElementById('delete-btn');
-                    if (deleteButton) {
-                        deleteButton.addEventListener('click', () => {
-
-                            cancelButton.classList.add('disabled')
-
-                            showSpinner();
-                            console.log("chcek the value", userDiv)
-
-                            deleteUser(username, userDiv);
-                        });
-                    } else {
-                        console.error('Delete button not found.');
+        
+                    // Remove any previous event listener to avoid multiple triggers
+                    deleteButton.removeEventListener('click', deleteUserHandler);
+                    deleteButton.addEventListener('click', deleteUserHandler);
+        
+                    function deleteUserHandler() {
+                        cancelButton.classList.add('disabled');
+                        showSpinner();
+                        console.log("check the value", userDiv);
+                        deleteUser(username, userDiv);
                     }
                 } else {
                     console.error('Delete username span not found.');
@@ -1172,26 +1178,23 @@
                 console.error('Confirmation modal not found.');
             }
         }
-
-
-
-
-
-
+        
         function closeConfirmationModal() {
             const confirmationModal = document.getElementById('confirmation-modal');
             const cancelButton = document.querySelector('.cancel-btn');
-
-            if (confirmationModal && cancelButton) {
+            const deleteButton = document.getElementById('delete-btn');
+        
+            if (confirmationModal && cancelButton && deleteButton) {
                 confirmationModal.style.display = 'none';
                 // Enable cancel button
                 cancelButton.classList.remove('disabled');
+                // Hide spinner
+                hideSpinner();
             } else {
-                console.error('Confirmation modal or cancel button not found.');
+                console.error('Confirmation modal, cancel button or delete button not found.');
             }
         }
-
-
+        
 
 
         /*   document.getElementById('dashboard-link').addEventListener('click', function (event) {
@@ -1352,11 +1355,11 @@
 
 
         function deleteUser(username, userDiv) {
-
             console.log('Deleting user:', username);
             const data = { username: username };
             const cancelButton = document.querySelector('.cancel-btn');
-
+            const deleteButton = document.getElementById('delete-btn');
+        
             fetch(`https://qjegb7vicl.execute-api.us-east-2.amazonaws.com/Sionyx/Deleteapi`, {
                 method: 'DELETE',
                 headers: {
@@ -1364,45 +1367,35 @@
                 },
                 body: JSON.stringify(data),
             })
-                .then(response => {
-                    if (response.ok) {
-                        console.log("message", response.ok)
-                        const deleteUsernameSpan = document.getElementById('snackbar1');
-                        deleteUsernameSpan.style.innerText = "Deleted Suc"
-                        userDiv.remove();
-                        //userDiv.make_admin.BOOL = false;
-                        closeConfirmationModal();
-                        cancelButton.classList.remove('disabled');
-                        if (username === localStorage.getItem('username')) {
-                            window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
-                        }
-                        else {
-                            fetchAndPopulateUserList();
-                            showToast("User deleted successfully");
-                            hideSpinnerr();
-                        }
-
+            .then(response => {
+                if (response.ok) {
+                    console.log("message", response.ok);
+                    const deleteUsernameSpan = document.getElementById('snackbar1');
+                    deleteUsernameSpan.innerText = "Deleted Successfully";
+                    userDiv.remove();
+                    closeConfirmationModal();
+                    if (username === localStorage.getItem('username')) {
+                        window.location.href = "https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/AdminLogin.html";
                     } else {
-                        throw new Error('Failed to delete user');
+                        fetchAndPopulateUserList();
+                        showToast("User deleted successfully");
                     }
-                })
-                .catch(error => {
-                    console.error('Error deleting user:', error);
-                });
-        }
-
-        function showToast(message, callback) {
-            var toast = document.getElementById("snackbar1");
-            toast.innerHTML = message;
-            toast.className = "show";
-            setTimeout(function () {
-                toast.className = toast.className.replace("show", "");
-                if (callback && typeof callback === "function") {
-                    callback();
+                } else {
+                    throw new Error('Failed to delete user');
                 }
-            }, 3000);
+            })
+            .catch(error => {
+                console.error('Error deleting user:', error);
+            })
+            .finally(() => {
+                // Ensure spinner is hidden and buttons are enabled regardless of success or failure
+                hideSpinner();
+                cancelButton.classList.remove('disabled');
+                deleteButton.removeEventListener('click', deleteUserHandler); // Clean up event listener
+            });
         }
-
+        
+       
 
 
         function getNameFromURL() {
@@ -1765,6 +1758,9 @@
             button.innerHTML = '<div class="spinner"></div>';
 
         }
+
+
+
         
     </script>
 
