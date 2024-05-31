@@ -228,6 +228,60 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', function () {
+        // Function to get the username from the URL query parameter
+        function getNameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('username');
+        }
+
+        // Function to get the username from localStorage
+        function getNameFromLocalStorage() {
+            return localStorage.getItem('username');
+        }
+
+        // Function to update the profile with the retrieved username
+        function updateProfileWithName(name) {
+            const profileSpan = document.getElementById('profile-username');
+            const profileUsernames = document.getElementById('profile-usernames');
+            if (profileSpan && profileUsernames) {
+                profileSpan.textContent = name;
+                profileUsernames.textContent = name;
+                localStorage.setItem('username', name);
+            } else {
+                console.error('Profile username elements not found.');
+            }
+        }
+
+        // Get the username from URL or localStorage
+        const nameFromURL = getNameFromURL();
+        const nameFromLocalStorage = getNameFromLocalStorage();
+
+        if (nameFromURL) {
+            updateProfileWithName(nameFromURL);
+        } else if (nameFromLocalStorage) {
+            updateProfileWithName(nameFromLocalStorage);
+        } else {
+            console.error('No username found in URL or localStorage.');
+        }
+
+        // Ensure we redirect to login page if no session token is found
+        if (!localStorage.getItem('sessionToken')) {
+            window.location.href = "AdminLogin.html";
+        } else {
+            // Fetch and render the data if session token is available
+            fetchDataAndRender();
+        }
+    });
+
+    // Example function to demonstrate fetching and rendering data
+  
+
+
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
 
         if (!localStorage.getItem('sessionToken')) {
             window.location.href = "AdminLogin.html";
@@ -684,6 +738,7 @@ var geoChartData = []
     function updateURL(page) {
         const url = new URL(window.location.href);
         url.searchParams.set('page', page);
+        url.searchParams.set('username',username);
         window.history.pushState({ path: url.href }, '', url.href);
     }
 
@@ -830,8 +885,49 @@ var geoChartData = []
 
 
 
+//////////////////////////logoutttttttt
 
+function logout(username) {
 
+    const cancelButton = document.querySelector('.logout-Cancel-btn');
+
+    fetch('https://p9p8zffjs0.execute-api.us-east-2.amazonaws.com/Sionyx/Signout-admin', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username })
+    })
+        .then(() => {
+            cancelButton.classList.remove('disabled')
+            localStorage.removeItem('sessionToken');
+            localStorage.removeItem('username');
+            window.location.href = "AdminLogin.html";
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function LogoutSpinner() {
+    var button = document.getElementById('logout-btn');
+    button.innerHTML = '<div class="spinner"></div>';
+
+}
+function myFunction() {
+    var x = document.getElementById("snackbar");
+    var y = document.getElementById("snackbarMob");
+
+    y.className = "show";
+    x.style.visibility = 'visible'
+    y.style.visibility = 'visible'
+    setTimeout(function () {
+        x.style.visibility = 'hidden'
+        y.style.visibility = 'hidden'
+
+    }, 3000);
+}
 
 
 
