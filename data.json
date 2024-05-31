@@ -43,15 +43,15 @@
     "deviceRatio": [
         {
             "name": "Android",
-            "percentage": "25%"
+            "percentage": "75%"
         },
         {
             "name": "iOS",
-            "percentage": "69%"
+            "percentage": "18%"
         },
         {
             "name": "Others",
-            "percentage": "56%"
+            "percentage": "7%"
         }
     ],
     "pieChartData": {

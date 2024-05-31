@@ -36,15 +36,15 @@
             <div class="redirect-container">
                 <!-- Dashboard Link -->
                 <a id="dashboard-link" href="Dashboard.html"
-                    style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
+                    style=" color: rgb(12, 12, 12); background-color: white; text-decoration: none">
                     <div style="display: inline-block;text-overflow:ellipsis"
                         onmouseout="document.getElementById('dashboard-link').style.color='black'">
                         <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
                     </div>
                 </a>
                 <!-- Users Link -->
-                <a href="UserDetails.html"><i class="fas fa-user-plus icon"
-                        style="color: rgb(148, 148, 148)"></i>Users</a>
+                <a href="UserDetails.html"><i class="fas  fa-users "
+                        style=" margin-right:8px;color: rgb(148, 148, 148)"></i>Users</a>
                 <!-- Add User Link -->
                 <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
@@ -87,14 +87,17 @@
             <!-- Redirect Container -->
             <div class="redirect-container">
                 <!-- Dashboard Link -->
-                <a href="https://sionyxadminpanel.s3.us-east-2.amazonaws.com/Adminpanel/UserDetails.html"
-                    id="dashboard-link"
-                    style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
+                <!-- Dashboard Link -->
+                <a id="dashboard-link" href="Dashboard.html"
+                    style=" color: rgb(12, 12, 12); background-color: white; text-decoration: none">
                     <div style="display: inline-block;text-overflow:ellipsis"
                         onmouseout="document.getElementById('dashboard-link').style.color='black'">
                         <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
                     </div>
                 </a>
+                <!-- Users Link -->
+                <a href="UserDetails.html"><i class="fas  fa-users "
+                        style=" margin-right:8px;color: rgb(148, 148, 148)"></i>Users</a>
                 <!-- Add User Link -->
                 <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
@@ -123,44 +126,63 @@
 
         </div>
 
-        <div class="dashboardContent">
+        <div class="dashboardContent" id="dashboardContent">
             <div class="headingConatainer">
                 <span id="BurgerIcon" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                 <h2 class="topHeader">Dashboard</h2>
             </div>
             <div style="font-weight: 600;font-size: 1.1rem;color: #252525;padding-bottom: 15px;">Overview</div>
 
-            <div class="cardsContainer">
-                <div class="cardRows1">
-                    <div class="cards totalUsersCard" id="totalUsersCard">
-
-                    </div>
-                    <div class="activeStatusCards" id="statusCard">
-
-                    </div>
-                    <div class="cards d-flex flex-column justify-content-between">
-                        <div style="font-weight: 600;font-size: 1.2rem;padding-top: 20px;padding-left: 20px;">Percentage
-                            of Camera Users</div>
-                        <div>
-                            <div id="piechart"></div>
+            <div class="cardsContainer" >
+                <div class="row mb-3 gx-0 gx-0 justify-content-center">
+                    <div class=" col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-3  col p-2 gx-0 gy-0 ">
+                        <div class="totalUsersCard cards" id="totalUsersCard">
 
                         </div>
-                        <div> </div>
+
+                    </div>
+                    <div class=" col col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4   p-2 gx-0 gy-0">
+                        <div class="activeStatusCards " id="statusCard">
+
+                        </div>
+                    </div>
+                    <div class=" col-12  col-xs-12 col-sm-12 col-md-12  col-lg-12 col-xl-5  p-2  gx-0 gy-0 ">
+                        <div class="cards d-flex flex-column  justify-content-between">
+                            <div style="font-weight: 600;font-size: 1.2rem;padding-top: 20px;padding-left: 20px;">
+                                Percentage
+                                of Camera Users</div>
+                            <div>
+                                <div id="piechart"></div>
+
+                            </div>
+                            <div> </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="cardRows2">
-                    <div class="cards p-4" id="topUsedCameras">
+                <div class="row gx-0 gx-0 justify-content-center">
 
-                    </div>
-                    <div class="cards p-4">
-                        <div class="fw-bold">Top Locations Of Users</div>
-                        <div class="d-flex justify-content-center">
-                            <div id="regions_div" style="width: 500px; height: 250px;"></div>
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 col p-2 gx-0 gy-0 ">
+                        <div class="cards  p-4" id="topUsedCameras">
+
                         </div>
                     </div>
-                    <div class="cards p-4" id="deviceRatioCard">
 
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-5 col p-2 gx-0 gy-0 ">
+                        <div class="cards piechartcontainer p-4">
+                            <div class="fw-bold">Top Locations Of Users</div>
+                            <div class="d-flex justify-content-center">
+                                <div id="regions_div" style="width: 500px; height: 250px;"></div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-3 col p-2 gx-0 gy-0 ">
+                        <div class="cards  p-4" id="deviceRatioCard">
+
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -274,7 +296,7 @@
     });
 
     // Example function to demonstrate fetching and rendering data
-  
+
 
 
 
@@ -291,30 +313,93 @@
 
         }
     });
-var pieChartData =[]
-var pieChartColors ={}
-var geoChartData = []
+    var pieChartData = []
+    var pieChartColors = {}
+    var geoChartData = []
 
     function fetchDataAndRender() {
+        const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'block';
+            }
 
-        const jsonUrl = './data.json'; // Path to the local JSON file
+            const dashboardContent = document.getElementById('dashboardContent');
+            if (dashboardContent) {
+                dashboardContent.style.display = 'none';
+            }
 
-        fetch(jsonUrl)
-            .then(response => response.json())
-            .then(data => renderPage(data))
-            .catch(error => console.error('Error fetching data:', error));
+        fetch('https://yvks7txdda.execute-api.us-east-2.amazonaws.com/Sionyx/staticdashboard', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                partition_key_value: 'b12b65e0-90a1-7065-3204-6eaf97dc467Y'
+            }),
+
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data[0][0]);
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+
+        fetch('https://d02byna87f.execute-api.us-east-2.amazonaws.com/Sionyx/staticadminindivualdata', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                partition_key_value: 'b12b65e0-90a1-7065-3204-6eaf97dc467Y'
+            }),
+
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("apiii", data);
+                renderPage(data[0])
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+
     }
     function renderPage(data) {
         pieChartData = data.pieChartData.data
         pieChartColors = data.pieChartData.colors
-        geoChartData = data.geoChartData
+        geoChartData = data.geochart
+
+        console.log("geo", data.geochart)
 
         renderToatlUsersCard(data)
         renderStatusCard(data.userStatus)
         renderTopUsedCard(data)
         renderDeviceRatioCard(data)
-       
+        drawChart();
+        drawRegionsMap();
+        const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
 
+            const dashboardContent = document.getElementById('dashboardContent');
+            if (dashboardContent) {
+                dashboardContent.style.display = 'block';
+            }
     }
 
     const renderToatlUsersCard = (data) => {
@@ -325,16 +410,20 @@ var geoChartData = []
 
         htmlContent +=
             ` <div class="toatlUsers d-flex flex-column justify-content-between">
-                    <div class="fw-bold">TotalUsers</div>
+                    <div class="fw-bold">Total Users</div>
                     <div class="d-flex justify-content-between">
-                        <div class="fw-bold fs-4 d-flex align-items-center">${data.totalUsers}</div>
+                        <div class="fw-bold fs-4 d-flex align-items-center">${data.totalUsers.noOfUser}</div>
                         <div>
                             <div class="d-flex justify-content-end">
                                 <img src="./Icons/icon-user.svg" alt="">
                             </div>
                             <div class="successContainer">
-                                <span>25%</span>
-                                <img src="./Icons/icon-uptrend-arrow.svg" alt="">
+                                <span>${data.totalUsers.percentage}</span>
+                                ${
+                                    data.totalUsers.increased === "true" ?
+                                           ` <img src="./Icons/icon-uptrend-arrow.svg" alt="">` :` <img src="./Icons/icon-downtrend-arrow.svg" alt=""> `
+                                        }
+                               
                             </div>
                         </div>
                     </div>
@@ -346,8 +435,12 @@ var geoChartData = []
             <div class="d-flex justify-content-between p-2">
                 <div>${item.name} Users</div>
                 <div class="fw-bold fs-5">
-                    <img src="./Icons/icon-uptrend.svg" alt="" />
-                    ${item.noofUsers}
+                    ${
+                                    item.increased === "true" ?
+                                           `   <img src="./Icons/icon-uptrend.svg" alt="" />` :` <img src="./Icons/icon-downtrend.svg" alt=""> `
+                                        }
+                  
+                    ${item.noOfUsers}
                 </div>
             </div>
         `;
@@ -365,7 +458,7 @@ var geoChartData = []
 
 
         htmlContent +=
-            ` <div class="cards d-flex p-4 flex-column justify-content-between" >
+            ` <div class="cards  gx-0 gx-0 d-flex p-4 flex-column justify-content-between" >
                             <div class="fw-bold">Online Users</div>
                             <div class="d-flex justify-content-between">
                                 <div class="fw-bold fs-4 d-flex align-items-center">${data.online}</div>
@@ -379,12 +472,14 @@ var geoChartData = []
                                 </div>
                             </div>
                         </div>
-                        <div class="cards d-flex p-4 flex-column justify-content-between">
+                        <div class="cards  gx-0 gx-0 d-flex p-4 flex-column justify-content-between">
                             <div class="fw-bold">Offline Users</div>
                             <div class="d-flex justify-content-between">
                                 <div class="fw-bold fs-4 d-flex align-items-center">${data.offline}</div>
                                 <div>
                                     <div class="d-flex justify-content-end">
+                                       
+
                                         <img src="./Icons/icon-user.svg" alt="">
                                     </div>
                                     <div class="errorContainer">
@@ -406,7 +501,7 @@ var geoChartData = []
         htmlContent +=
             ` 
             <div class="fw-bold">Most Top Used Camera</div>
-            <div class="cameraList mt-3 overflow-y-auto" style="overflow-y: auto !important;">
+            <div class="cameraList mt-3 " >
 
             ${data.topUsedDevices.map(item => {
                 console.log("item", item);
@@ -427,7 +522,7 @@ var geoChartData = []
                                         <div class="text-secondary">${item.location}</div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center text-primary">${item.toatlProducts} products</div>
+                                <div class="d-flex align-items-center  noOfProductsText">${item.toatlProducts} products</div>
                             </div>
 
                       
@@ -486,7 +581,7 @@ var geoChartData = []
         'packages': ['geochart'],
     });
 
-    google.charts.setOnLoadCallback(drawRegionsMap);
+    // google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable(geoChartData);
@@ -495,6 +590,9 @@ var geoChartData = []
             legend: 'none',
             colorAxis: { colors: ["#00568B"] },
             datalessRegionColor: '#EBEBEB',
+            chartArea: {
+                width: "95%"
+            }
             //defaultColor: '#EBEBEB'
         };
 
@@ -505,7 +603,7 @@ var geoChartData = []
 
 
     google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    //google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
 
@@ -514,9 +612,8 @@ var geoChartData = []
         var options = {
             pieSliceBorderColor: "transparent",
             chartArea: {
-
-                height: "95%",
-                width: "95%"
+                width: "95%",
+                height: "95%"
             },
             legend: {
                 alignment: "center",
@@ -531,6 +628,10 @@ var geoChartData = []
 
         chart.draw(data, options);
     }
+    window.addEventListener('resize', function (e) {
+        drawChart();
+        drawRegionsMap();
+    })
 
     function openNav() {
         document.getElementById("sidebarOffCanvas").style.display = "flex";
@@ -738,7 +839,7 @@ var geoChartData = []
     function updateURL(page) {
         const url = new URL(window.location.href);
         url.searchParams.set('page', page);
-        url.searchParams.set('username',username);
+        url.searchParams.set('username', username);
         window.history.pushState({ path: url.href }, '', url.href);
     }
 
@@ -885,49 +986,49 @@ var geoChartData = []
 
 
 
-//////////////////////////logoutttttttt
+    //////////////////////////logoutttttttt
 
-function logout(username) {
+    function logout(username) {
 
-    const cancelButton = document.querySelector('.logout-Cancel-btn');
+        const cancelButton = document.querySelector('.logout-Cancel-btn');
 
-    fetch('https://p9p8zffjs0.execute-api.us-east-2.amazonaws.com/Sionyx/Signout-admin', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username })
-    })
-        .then(() => {
-            cancelButton.classList.remove('disabled')
-            localStorage.removeItem('sessionToken');
-            localStorage.removeItem('username');
-            window.location.href = "AdminLogin.html";
+        fetch('https://p9p8zffjs0.execute-api.us-east-2.amazonaws.com/Sionyx/Signout-admin', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
         })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-}
+            .then(() => {
+                cancelButton.classList.remove('disabled')
+                localStorage.removeItem('sessionToken');
+                localStorage.removeItem('username');
+                window.location.href = "AdminLogin.html";
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
 
-function LogoutSpinner() {
-    var button = document.getElementById('logout-btn');
-    button.innerHTML = '<div class="spinner"></div>';
+    function LogoutSpinner() {
+        var button = document.getElementById('logout-btn');
+        button.innerHTML = '<div class="spinner"></div>';
 
-}
-function myFunction() {
-    var x = document.getElementById("snackbar");
-    var y = document.getElementById("snackbarMob");
+    }
+    function myFunction() {
+        var x = document.getElementById("snackbar");
+        var y = document.getElementById("snackbarMob");
 
-    y.className = "show";
-    x.style.visibility = 'visible'
-    y.style.visibility = 'visible'
-    setTimeout(function () {
-        x.style.visibility = 'hidden'
-        y.style.visibility = 'hidden'
+        y.className = "show";
+        x.style.visibility = 'visible'
+        y.style.visibility = 'visible'
+        setTimeout(function () {
+            x.style.visibility = 'hidden'
+            y.style.visibility = 'hidden'
 
-    }, 3000);
-}
+        }, 3000);
+    }
 
 
 

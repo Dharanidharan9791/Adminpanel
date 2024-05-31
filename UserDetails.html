@@ -279,8 +279,8 @@
 
 
 
-    <a href="UserDetails.html" ><i class="fas fa-users"
-        style="color: rgb(148, 148, 148); margin-right:8px;"></i>Users</a>
+    <a href="UserDetails.html" style="color: rgb(12, 12, 12); background-color: white; text-decoration: none"><i class="fas fa-users"
+        style=" margin-right:8px;"></i>Users</a>
 
                 <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
@@ -328,7 +328,7 @@
                     onmouseout="document.getElementById('dashboard-link').style.color='black'">
                     <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
                 </div>
-            </a
+            </a>
 
                     <a href="UserDetails.html" ><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Users</a>
@@ -1254,28 +1254,27 @@
 
         function filterUsers() {
             const input = document.querySelector('.search-input');
-
             const filter = input.value.trim().toUpperCase().replace(/[^A-Z]/g, ''); // Trim whitespace from input and remove numbers
-
+        
             const userList = document.getElementById('user-details-body');
             const users = userList.getElementsByTagName('tr');
             let visibleUserCount = 0; // Counter for visible users
-
+        
             // Loop through all users
-            for (let i = 1; i < users.length; i++) { // Start from index 1 to exclude header row
+            for (let i = 0; i < users.length; i++) {
                 const usernameCell = users[i].getElementsByTagName('td')[0];
                 if (usernameCell) {
                     const txtValue = usernameCell.textContent || usernameCell.innerText;
                     const username = txtValue.trim().toUpperCase(); // Convert username to uppercase for case-insensitive comparison
-
+        
                     let match = true; // Assume match initially
                     let filterIndex = 0; // Initialize filter index
-
+        
                     // Loop through both username and filter characters
                     for (let j = 0; j < username.length && filterIndex < filter.length; j++) {
                         const usernameChar = username[j];
                         const filterChar = filter[filterIndex];
-
+        
                         if (usernameChar === filterChar) {
                             filterIndex++; // Move to the next character in the filter
                         } else {
@@ -1283,12 +1282,12 @@
                             break; // Exit loop if characters don't match
                         }
                     }
-
+        
                     // Check if all characters in the filter were matched
                     if (filterIndex !== filter.length) {
                         match = false; // Set match to false if not all characters in the filter were matched
                     }
-
+        
                     if (match) {
                         users[i].style.display = ''; // Show user if there's a match
                         visibleUserCount++;
@@ -1297,7 +1296,7 @@
                     }
                 }
             }
-
+        
             // Show or hide the "No users found" message based on the presence of matching users
             const noUsersMessage = document.getElementById('no-users-message');
             if (visibleUserCount === 0) {
@@ -1305,49 +1304,36 @@
             } else {
                 noUsersMessage.style.display = 'none'; // Hide the message if there are visible users
             }
-
+        
             const paginationContainer = document.getElementById('paginationContainer');
-
-
-
+        
             if (filter === '') { // If search bar is empty
-                // Retrieve current page number from URL
                 noUsersMessage.style.display = 'none';
                 const currentPage = getCurrentPageNumber();
-                // Show the users corresponding to the retrieved page number
                 showPage(currentPage);
-
-                // Update URL with current page number
                 updateURL(currentPage);
-
-                // Show pagination container
                 paginationContainer.style.display = 'flex';
-
                 pagination();
-                // Hide no users found message
-
-
+        
                 // Hide rows beyond 10 if there are more than 10 visible users
-                for (let i = 11; i < users.length; i++) {
+                for (let i = 10; i < users.length; i++) {
                     users[i].style.display = 'none';
                 }
             } else { // If search bar has input
                 if (visibleUserCount === 0) { // If no users found
-                    // Show no users found message
                     noUsersMessage.style.display = 'block';
-                    // Hide pagination container
                     paginationContainer.style.display = 'none';
+                    // Ensure all rows are hidden except the header row (if any)
+                    for (let i = 0; i < users.length; i++) {
+                        users[i].style.display = 'none';
+                    }
                 } else { // If users found
-                    // Hide no users found message
                     noUsersMessage.style.display = 'none';
-                    // Hide pagination container
                     paginationContainer.style.display = 'none';
                 }
             }
-
         }
-
-
+        
 
 
 

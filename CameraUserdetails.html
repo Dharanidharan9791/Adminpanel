@@ -126,17 +126,18 @@
 
             <br>
             <div class="redirect-container">
-                <a id="dashboard-link"
-        href="Dashboard.html"
-        style="margin-bottom: 15px; color: rgb(12, 12, 12); background-color: white; text-decoration: none">
-        <div style="display: inline-block;text-overflow:ellipsis"
-            onmouseout="document.getElementById('dashboard-link').style.color='black'">
-            <i class="fas fa-tachometer-alt icon" style="color: #333;"></i>Dashboard
-        </div>
-    </a>
-    <a href="UserDetails.html" ><i class="fas fa-user-plus icon"
-        style="color: rgb(148, 148, 148)"></i>Users</a>
-                <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"></i>Add User</a>
+                <a id="dashboard-link" href="Dashboard.html">
+                    <div style="display: inline-block;text-overflow:ellipsis"
+                    onmouseover="document.getElementById('dashboard-link').style.color='black';"
+                    onmouseout="document.getElementById('dashboard-link').style.color='white'">
+                        <i class="fas fa-tachometer-alt icon" style="color: rgb(148, 148, 148);"></i>Dashboard
+                    </div>
+                </a>
+                <a href="UserDetails.html"
+                    style="color: rgb(12, 12, 12); background-color: white; text-decoration: none"><i
+                        class="fas fa-user-plus icon"></i>Users</a>
+                <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
+                        style="color: rgb(148, 148, 148)"></i>Add User</a>
                 <div id="snackbar">Still in implementation!</div>
 
             </div>
@@ -175,8 +176,15 @@
             </div>
 
             <div class="redirect-container">
-                <a href="UserDetails.html" ><i class="fas fa-user-plus icon"
-                    style="color: rgb(148, 148, 148)"></i>Users</a>
+                <a id="dashboard-link" href="Dashboard.html">
+                    <div style="display: inline-block;text-overflow:ellipsis"
+                        onmouseout="document.getElementById('dashboard-link').style.color='black'">
+                        <i class="fas fa-tachometer-alt icon" style="color: rgb(148, 148, 148);"></i>Dashboard
+                    </div>
+                </a>
+                <a href="UserDetails.html"
+                    style="color: rgb(12, 12, 12); background-color: white; text-decoration: none"><i
+                        class="fas fa-user-plus icon"></i>Users</a>
                 <a href="#" onclick="myFunction()"><i class="fas fa-user-plus icon"
                         style="color: rgb(148, 148, 148)"></i>Add User</a>
                 <div id="snackbarMob">Still in implementation!</div>
@@ -236,7 +244,7 @@
                 <div id="no-cameras-message" style="display: none; color:black; text-align: center;">
                     No cameras found.
                 </div>
-                <div class="user-table-container" >
+                <div class="user-table-container">
 
                     <div id="bodyTableContainer" class="bodyTableContainer camerabodyTableContainer">
                         <table class="user-table" id="camera-table">
@@ -514,7 +522,7 @@
 
 
         setTimeout(() => {
-            window.location.href = "UserDetails.html";
+            window.location.href = "Dashboard.html";
         }, 1000);
     });
 
